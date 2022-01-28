@@ -1,0 +1,11 @@
+<div class="bg">
+    <mat-icon class="icon">warning</mat-icon>
+    <p class="msg">{{ data.message }}</p>
+
+    <div fxLayout="row" fxLayoutAlign="space-around" mat-dialog-actions>
+        <button class="button" mat-raised-button style="font-family: Kanit;" (click)="deleteData(data.id)"
+            [mat-dialog-close]="">ตกลง</button>
+        <button class="buttoncancel" mat-raised-button style="font-family: Kanit;"
+            (click)="onCancelClick()">ยกเลิก</button>
+    </div>
+</div>

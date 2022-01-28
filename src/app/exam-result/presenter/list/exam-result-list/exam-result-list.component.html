@@ -1,0 +1,47 @@
+<div class="marginright">
+    <table mat-table [dataSource]="examineeList" class="mat-elevation-z8">
+        <ng-container matColumnDef="1">
+            <th mat-header-cell *matHeaderCellDef width="5%">ลำดับ</th>
+            <td mat-cell *matCellDef="let a"> {{a.index}}</td>
+        </ng-container>
+        <ng-container matColumnDef="2">
+            <th mat-header-cell *matHeaderCellDef width="15%">เลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let a"> {{a.citizen_id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="3">
+            <th mat-header-cell *matHeaderCellDef width="15%">ชื่อผู้เข้าสอบ</th>
+            <td mat-cell *matCellDef="let a"> {{a.candidate_name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="4">
+            <th mat-header-cell *matHeaderCellDef width="15%">สาขาที่สอบ</th>
+            <td mat-cell *matCellDef="let a"> {{a.course_name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="5">
+            <th mat-header-cell *matHeaderCellDef width="10%">วันที่สอบ</th>
+            <td mat-cell *matCellDef="let a"> {{a.to_date | date: 'dd-MM-yyyy'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="6">
+            <th mat-header-cell *matHeaderCellDef width="10%">เวลา</th>
+            <td mat-cell *matCellDef="let a"> {{ a.start_time | date: "shortTime" }} - {{ a.end_time | date: "shortTime" }}</td>
+        </ng-container>
+        <ng-container matColumnDef="7">
+            <th mat-header-cell *matHeaderCellDef width="10%">ข้อที่สอบได้</th>
+            <td mat-cell *matCellDef="let a"> {{ a.candidate_scores}}</td>
+        </ng-container>
+        <ng-container matColumnDef="8">
+            <th mat-header-cell *matHeaderCellDef width="10%">ผลการสอบ</th>
+            <td mat-cell *matCellDef="let a"> 
+                <span *ngIf="a.is_pass == true">ผ่าน</span>
+                <span *ngIf="a.is_pass == false">ไม่ผ่าน</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="9">
+            <th mat-header-cell *matHeaderCellDef width="15%">ดูผลสอบ</th>
+            <td mat-cell *matCellDef="let a"> <mat-icon style="cursor: pointer;" [routerLink]="a.test_id">search</mat-icon></td>
+        </ng-container>
+     
+        <tr mat-header-row *matHeaderRowDef="column"></tr>
+        <tr mat-row *matRowDef="let row; columns: column;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,86 @@
+<mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-toolbar-row>
+        <p (click)="back()" style="cursor: pointer;">< ผลการสอบ</p>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="marginright" fxLayout="row" fxLayout="space-between">
+    <div class="box" fxFlex="60">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="30" >
+                <img *ngIf="candidateData" style="width: 100%; height: auto;" [src]=candidateData[0].candidate_img_base64/>
+            </div>
+            <div fxLayout="column" fxFlex="70" style="margin-left: 20px;">
+              <p> {{ data?.test?.candidate_name }} ({{data?.test?.citizen_id}})</p>
+              <p>สถานที่สอบ  {{data?.test?.location_name}}</p>
+              <p>วันที่ {{ data?.test?.from_date | thaidate }}</p>
+              <p>เวลาเข้าสอบ {{ data?.test?.start_time | thaidate}} {{ data?.test?.start_time | date: 'shortTime' }} น.</p>
+              <p>สาขาการทดสอบครั้งนี้ คือ {{ data?.test?.course_name }}</p>
+              <p>ระดับ : {{ data?.test?.level }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="box" fxFlex="40">
+        <div fxLayout="row">
+            <div class="box bgcolorscore" style="width: 100%;" fxLayoutAlign="space-evenly center">
+              <div fxLayout="column">
+                <div>
+                  จำนวนข้อที่ถูก
+                </div>
+                <div fxLayoutAlign="space-evenly center" style="font-size: 40px; line-height: 40px;">
+                    {{ data?.test?.candidate_scores }}
+                </div>
+              </div>
+            </div>
+            <div class="box bgcolorscoreper" style="width: 100%;" fxLayoutAlign="space-evenly center">
+              <div fxLayout="column">
+                <div fxLayoutAlign="space-evenly center">
+                  ร้อยละ
+                </div>
+                <div fxLayoutAlign="space-evenly center" style="font-size: 40px; line-height: 40px;">
+                    {{ data?.test?.correct_percent }}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div fxLayoutAlign="center center" fxLayout="row">
+            ได้ {{ data?.test?.candidate_scores }} ข้อจากข้อสอบ {{ data?.test?.total_scores }} ข้อ
+        </div>
+    </div>
+</div>
+
+<div class="marginright">
+    <div class="box">
+        <h1 style="font-family: kanit;">แบบทดสอบ</h1>
+        <hr>
+        <div *ngFor="let x of data?.topics">
+            <p>หมวด : {{x.topic_name}}</p>
+            <exam-topic-list [data]="x.questions"></exam-topic-list>
+            <!-- <table mat-table [dataSource]="x.questions" >
+                <ng-container matColumnDef="1" >
+                    <th mat-header-cell *matHeaderCellDef style="width: 40%;">ข้อ</th>
+                    <td mat-cell *matCellDef="let x; "> {{x.question_no}}</td>
+                </ng-container>
+                <ng-container matColumnDef="2" >
+                    <th mat-header-cell *matHeaderCellDef>คำตอบ</th>
+                    <td mat-cell *matCellDef="let x">
+                        <div *ngIf="x.is_correct == true" fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon style="color: rgb(0, 189, 116);">check_box</mat-icon>
+                        <h1 style="margin-top: 15px; font-family: kanit;">ตอบถูก</h1>
+                        </div>
+                        <div *ngIf="x.is_correct == null" fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon style="color: rgb(197, 122, 9);">indeterminate_check_box</mat-icon>
+                        <h1 style="margin-top: 15px; font-family: kanit;">ไม่ได้ตอบ</h1>
+                        </div>
+                        <div *ngIf="x.is_correct == false" fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon style="color:red;">indeterminate_check_box</mat-icon>
+                        <h1 style="margin-top: 15px; font-family: kanit;">ตอบผิด</h1>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="column"></tr>
+                <tr mat-row *matRowDef="let row; columns: column;" style="cursor: pointer;" (click)="questionInfo(row)"></tr>
+            </table> -->
+            <hr>
+        </div>
+    </div>
+</div>

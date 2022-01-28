@@ -1,0 +1,84 @@
+table {
+    width: 100%
+}
+
+
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+.error {
+    font-size: 11px;
+    color: red;
+}
+
+.toplabel {
+    font-family: Kanit;
+font-style: normal;
+font-weight: 100;
+font-size: 30px;
+line-height: 22px;
+}
+
+.label {
+    font-family: Kanit;
+}
+
+.height {
+    height: 48px;
+    width: 159px;
+    margin-top: 13px;
+    border-radius: 200px;
+    background: #56CCF2;
+    font-family: Kanit;
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+// line-height: px;
+/* identical to box height, or 100% */
+
+letter-spacing: 0.75px;
+text-transform: uppercase;
+
+color: #131212;
+}
+
+.shadow {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    height: 82px;
+}   
+
+.marginright {
+    margin-left: 12px;
+    margin-top: 8px;
+    margin-right: 8px;
+    padding-top: 10px;
+}
+
+.marginright1 {
+    margin-left: 8px;
+    // margin-top: 8px;
+    margin-right: 8px;
+    padding-top: 10px;
+}
+.mat-button-toggle {
+box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+margin-top: 4px;
+// margin-left: 4px;
+border-radius: 10px 10px 0px 0px; 
+background-color: #CCCCCC; 
+}
+
+.mat-button-toggle-checked {
+    background-color: #2BBEEE;
+  }
+
+  .a{
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  }

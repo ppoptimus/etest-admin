@@ -1,0 +1,82 @@
+<div class="container">
+    <mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between">
+      <mat-toolbar-row>
+        <mat-label class="label">รายการวิเคราะห์&nbsp;</mat-label><mat-label style="font-size: 18px">ความเชื่อมั่น</mat-label>
+      </mat-toolbar-row>
+    </mat-toolbar>
+      <div class="marginright">
+        <div style="padding-top: 10px; background-color: white;">
+            <div fxLayoutAlign="start center" fxLayout="row">
+             <mat-label style="width: 100px;" class="label">สาขา&nbsp;</mat-label><mat-label style="font-size: 18px">การทำขนมไทย</mat-label>   
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <br><mat-label class="label" style="width: 100px;">จำนวนเรื่อง&nbsp;</mat-label><mat-label style="font-size: 18px">14</mat-label>
+            <mat-label style="margin-left: 50px; width: 150px;" class="label">จำนวนผู้เข้าสอบ&nbsp;</mat-label><mat-label style="font-size: 18px">5</mat-label>
+        </div>
+
+        <table style="margin-top: 10px;">
+            <tr>
+                <td [attr.rowSpan]="2" style="width: 150px; height:50px;text-align: center; background-color: rgb(175, 172, 172);">ข้อ ผู้สอบ</td>
+                <!-- <td [attr.rowSpan]="2" style="text-align: center;"> ข้อ1</td>
+                <td [attr.rowSpan]="2" style="text-align: center;"> x2</td> -->
+            </tr> 
+          <tr>
+              <ng-container *ngFor="let tester of question; let i = index;">
+                <th style="width: 150px; text-align: center; background-color: rgb(175, 172, 172);" >ข้อ {{i+1}}</th>
+                <th style="width: 150px; text-align: center; background-color: rgb(175, 172, 172);" >x²</th>
+              </ng-container >
+            
+          </tr>
+        
+          <tr *ngFor="let datas of tester; let i = index;">
+              <td style="text-align: center;">{{i+1}}</td>
+
+              <ng-container *ngFor="let tester of question; let i = index;">
+                <td  style="text-align: center; ">{{numbers[i]}}</td>
+                <td  style="text-align: center; background-color: rgb(96, 155, 119);">{{numbers[i]}}</td>
+            </ng-container>
+
+
+            </tr>
+
+            <tr>
+                <td [attr.rowSpan]="2" style="width: 150px; text-align: center; height: 40px;">∑(x)</td>
+            </tr> 
+          <tr>
+              <ng-container *ngFor="let tester of question; let i = index;">
+            <th style="width: 150px; text-align: center; height: 40px;"  >{{question[i]}}</th>
+            <th style="width: 150px; text-align: center; height: 40px; background-color: rgb(96, 155, 119);"  >-</th>
+              </ng-container>
+          </tr>
+           <tr>
+                <td [attr.rowSpan]="2" style="width: 150px; text-align: center;">(∑x)²</td>
+            </tr> 
+          <tr>
+              <ng-container *ngFor="let tester of question; let i = index;">
+            <th style="width: 150px; text-align: center; height: 40px;"  >{{question[i]}}</th>
+            <th style="width: 150px; text-align: center; height: 40px; background-color: rgb(96, 155, 119);"  >-</th>
+              </ng-container>
+          </tr>
+           <tr>
+                <td [attr.rowSpan]="2" style="width: 150px; text-align: center;">∑(x)²</td>
+            </tr> 
+          <tr>
+             <ng-container *ngFor="let tester of question">
+            <th style="width: 150px; text-align: center; height: 40px; background-color: rgb(60, 182, 30);" >&nbsp;</th>
+            <th style="width:  150px; text-align: center; height: 40px; "  >1</th>
+              </ng-container>
+          </tr>
+           <tr>
+                <td [attr.rowSpan]="2" style="width: 150px; text-align: center; height: 50px;"><img style="width: 150px;"src="/assets/function.png"></td>
+            </tr> 
+          <tr>
+            <th [attr.colSpan]="2" style="text-align: center; height: 50px" *ngFor="let tester of question" >0.00</th>
+            <!-- <th style="width: 150px; text-align: center;" *ngFor="let tester of numbers" >&nbsp;</th> -->
+          </tr>
+
+          </table>
+            <p class="a">a = 0.52</p>
+            <p class="result">ข้อสอบชุดนี้มีความเชื่อมั่นสูง</p>
+        </div>
+      </div>
+</div>

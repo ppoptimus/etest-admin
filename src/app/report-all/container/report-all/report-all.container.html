@@ -1,0 +1,10 @@
+<div class="container">
+    <search-report-all
+        (search)="onSearch($event)"
+        (report)="onReportType($event)"
+    ></search-report-all>
+    <report-all-list *ngIf="reportList$ | async"
+        [reportList]="reportList$ | async"
+        [reportType]="reportType"
+    ></report-all-list>
+</div>

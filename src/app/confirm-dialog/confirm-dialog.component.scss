@@ -1,0 +1,48 @@
+.msg {
+font-family: Kanit;
+font-style: normal;
+font-weight: 250;
+font-size: 24px;
+// line-height: 16px;
+/* identical to box height, or 44% */
+
+letter-spacing: 0.75px;
+text-transform: uppercase;
+padding-left: 35px;
+color: #000000;
+}
+
+.dialog {
+    width:100%;
+    width: 500px;
+    height: 245px;
+    // display:flex;
+//   flex-direction:row;
+//   justify-content:center;
+}
+
+.icon {
+    font-size: 100px; 
+    // text-align: center; 
+    // display: flex;
+    width:100px;
+    // display: flex;             
+    // align-self: center; 
+    margin-left: 149px;
+    color: #F2C94C;
+    
+}
+.bg {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -24px;
+    background: #F9F3BE;
+
+}
+.button {
+    background-color: #FDEBEB;
+} 
+
+.buttoncancel {
+    background-color: #EBF9BE;
+}

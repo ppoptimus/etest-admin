@@ -1,0 +1,18 @@
+<mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-toolbar-row>
+      <mat-form-field appearance="outline" style="padding-top: 40px; width: 40%" [style.fontSize.px]=13>
+        <mat-label>วันที่</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="query.from_date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+      <span class="spacer"></span>
+      <mat-form-field appearance="outline" style="padding-top: 40px; width:40%; font-family: kanit;"
+      [style.fontSize.px]=13>
+        <mat-label>ค้นหาชื่อผู้เข้าสอบ</mat-label>
+        <input matInput [(ngModel)]="query.candidate_name">
+      </mat-form-field>
+      <span class="spacer"></span>
+      <button class="height" mat-raised-button color="accent" (click)="onSearch()">ค้นหา</button>
+    </mat-toolbar-row>
+  </mat-toolbar>

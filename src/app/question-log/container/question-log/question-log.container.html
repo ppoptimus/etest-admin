@@ -1,0 +1,12 @@
+<div class="container">
+    <question-log-search
+        [occList]="occList$ | async"
+        (searchOc)="onSearchOc($event)"
+        (search)="onSearch($event)">
+    </question-log-search>
+    <question-log-list
+        [questionList]="questionList$ | async"
+        (getApp)="onGetApp()"
+        (getNonApp)="onGetNonApp()">
+    </question-log-list>
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="column" fxLayoutAlign="space-around">
+      <p class="head">กลุ่มของสิทธิ์จากระบบ</p>
+
+      <mat-form-field appearance="outline" style="font-size: 20px; width: 400px;">
+        <mat-label>username</mat-label>
+        <mat-select (selectionChange)="onChange($event.value)">
+          <mat-option *ngFor="let a of loginData" [value]="a.login_id">
+            {{a.user_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around">
+      <p class="head">สถานะ</p>
+      <mat-form-field appearance="outline" style="font-size: 20px; width: 400px;">
+        <mat-label>ใช้งาน</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="marginright">
+    <div>
+      <div style="margin-top: -30px;">
+        <table mat-table [dataSource]="dataSource" >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef width="20%">ลำดับ</th>
+            <td mat-cell *matCellDef="let a; let i = index;"> {{i+1}}</td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef width="60%">กลุ่มของสิทธิ์จากระบบ</th>
+            <td mat-cell *matCellDef="let a"> {{a.name}}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef width="20%">สถานะ</th>
+            <td mat-cell *matCellDef="let a; let i = index;">
+              <mat-slide-toggle (change)="check(i,$event)"></mat-slide-toggle>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="tableDisplayColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableDisplayColumns;"></tr>
+        </table>
+      </div>
+      <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" style="padding-top: 20px;">
+        <button class="save" mat-raised-button type="submit" [mat-dialog-close]>บันทึก</button>
+        <button class="cancel" mat-raised-button [mat-dialog-close]>ยกเลิก</button>
+      </div>
+      <!-- <pre>{{form.getRawValue() | json}}</pre> -->
+      <div style="margin-top: -15px; position: absolute; ">
+        <p style="margin-top: 20px;">หมายเหตุ</p>
+        <p style="margin-top: -10px;">1) ผู้ดูแลระบบกำหนดสิทธิ์ ผู้ตรวจสอบข้อสอบ ผู้นำเข้าข้อสอบ และผู้ดูแลระบบหน่วยงาน
+        </p>
+        <p style="margin-top: -10px;">2) ผู้ตรวจสอบข้อสอบมีสิทธิ์แก้ไขความถูกต้อง เพิ่ม ลบ และเห็นชอบให้ใช้ข้อสอบได้</p>
+        <p style="margin-top: -10px;">3) ผู้นำเข้าข้อสอบมีสิทธิ์ เพิ่ม ลบ แก้ไข ข้อสอบ</p>
+        <p style="margin-top: -10px;">4) ผู้ดูแลระบบหน่วยงานมีสิทธิ์กำหนดสิทธิ์ผู้เข้ารับการทดสอบ</p>
+        <p style="margin-top: -10px;">5) ผู้เข้ารับการทดสอบมีสิทธิ์ของผู้ใช้งาน</p>
+        <p style="margin-top: -10px;">6) ผู้ดูแลระบบจะมีสิทธิ์ในการดูข้อมูลการสอบย้อนหลัง</p>
+      </div>
+    </div>
+  </div>
+</div>

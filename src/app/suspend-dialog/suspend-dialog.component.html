@@ -1,0 +1,13 @@
+<div class="container">
+    <mat-label fxLayoutAlign="center" fxlayout="row" class="header">ระงับการใช้คำถาม</mat-label>
+    <br><mat-label class="remark">หมายเหตุที่ใช้ระงับคำถาม</mat-label>
+    <div class="remarkcontent">
+        <form [formGroup]="suspendForm">
+        <textarea style="height: 140px; width: 470px" formControlName="remark"></textarea>
+    </form>
+    </div>
+    <div fxLayoutAlign="space-evenly center" fxlayout="row" style="margin-top: 10px;">
+        <button mat-raised-button (click)="suspend(suspendForm.value)" [mat-dialog-close]>บันทึก</button>
+        <button mat-raised-button [mat-dialog-close]>ยกเลิก</button>
+    </div>
+</div>

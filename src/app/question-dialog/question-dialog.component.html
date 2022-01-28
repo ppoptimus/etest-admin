@@ -1,0 +1,70 @@
+<mat-toolbar color="2d9cdb">
+    <mat-toolbar-row>
+      <span></span>
+      <span class="spacer"></span>
+      <button mat-button mat-dialog-close><span class="material-icons">
+          close
+        </span></button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+<div style="margin-bottom: 50px;">
+    <p class="textCenter fontSize30" style="margin-top: 10px;" [innerHTML]="questionData?.question_name | safeurl"></p>
+    <div>
+        <mat-radio-group *ngIf="questionData?.is_match == false">
+            <div fxLayout="row wrap">
+                <div fxFlex="50%" *ngFor="let x of questionData?.choices; let i = index;"
+                    style="margin-bottom: 20px;" >
+                    <div  [ngClass]="{'choiceContainer': questionData.selected_choice !== x.choice_no, 'correct': x.choice_no === questionData.selected_choice && x.is_correct == true, 'false': x.choice_no === questionData.selected_choice && x.is_correct == false }">
+                        <div class="marginT50PX pic" style="margin-left:20px">
+                                <mat-radio-button disabled [checked]=x.is_correct [value]="x"></mat-radio-button>
+                            <span (click)="showPicture(x.choice_name)"
+                            style="font-family: 'Kanit'; font-size: 20px; font-weight: 300; word-wrap: break-word;"
+                            [innerHTML]="x.choice_name | safeurl"></span>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-radio-group>
+
+        <div fxLayout="row" *ngIf="questionData?.is_match == true">
+
+            <div fxFlex=50 fxLayout="column">
+                <div *ngFor="let x of questionData?.question_matches; let i = index;" style="margin-bottom: 20px;">
+                    <div [ngClass]="{'correct pic': isCorrect(x) == true, 'false pic': isCorrect(x) == false, 'matchcontainer1 pic': isCorrect(x) == null}" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span style="font-family: 'Kanit'; font-size: 20px; word-wrap: break-word; margin-left: 10px; margin-right: 10px;"
+                                [innerHTML]="x.question_name | safeurl" (click)="showPicture(x.question_name)"></span>
+                                <div>
+                                    <select [ngClass]="{'correctMatch': isCorrect(x) == true, 'falseMatch': isCorrect(x) == false}" disabled [(ngModel)]="x.selected_choice_id">
+                                        <option *ngFor="let b of questionData?.choices; let i = index" [value]="b.test_choice_id">
+                                            {{textthai[i]}}
+                                        </option>
+                                    </select>
+                                    <select style="margin-right: 10px;" disabled [(ngModel)]="x.correct_choice_id">
+                                        <option *ngFor="let b of questionData?.choices; let i = index" [value]="b.choice_id">
+                                            {{textthai[i]}}
+                                        </option>
+                                    </select>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex=50 fxLayout="column">
+                <div *ngFor="let x of questionData?.choices; let i = index;" style="margin-bottom: 20px;">
+                    <div class="matchcontainer1 pic" fxLayout="row" fxLayoutAlign="space-between center">
+                    <span style="font-family: 'Kanit'; font-size: 20px; word-wrap: break-word; margin-left: 10px; margin-right: 10px;"
+                            [innerHTML]="x.choice_name | safeurl"
+                            (click)="showPicture(x.choice_name)"
+                            ></span>
+                            <select style="margin-right: 10px; opacity: 0%; pointer-events: none;" >
+                                <option >
+                                    
+                                </option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

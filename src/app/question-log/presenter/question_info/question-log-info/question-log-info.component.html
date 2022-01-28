@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="displayData" >
+    <ng-container matColumnDef="1">
+      <th mat-header-cell *matHeaderCellDef width="15%">ลำดับ</th>
+      <td mat-cell *matCellDef="let course; let i = index"> {{i+1}}</td>
+    </ng-container>
+    <ng-container matColumnDef="2">
+      <th mat-header-cell *matHeaderCellDef width="40%">ชื่อผู้ทำการ</th>
+      <td mat-cell *matCellDef="let course"> {{course.action_by}}</td>
+    </ng-container>
+    <ng-container matColumnDef="3">
+      <th mat-header-cell *matHeaderCellDef width="10%" >action</th>
+      <td mat-cell *matCellDef="let course"> {{course.action}}</td>
+    </ng-container>
+    <ng-container matColumnDef="4">
+      <th mat-header-cell *matHeaderCellDef width="25%">วันที่ดำเนินการ</th>
+      <td mat-cell *matCellDef="let course"> {{course.action_datetime | thaidate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="5">
+      <th mat-header-cell *matHeaderCellDef width="10%">เวลา</th>
+      <td mat-cell *matCellDef="let course"> {{course.action_datetime | date:'shortTime'}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="column"></tr>
+    <tr mat-row *matRowDef="let row; columns: column;" (click)="questionInfo(row)"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20]"></mat-paginator>

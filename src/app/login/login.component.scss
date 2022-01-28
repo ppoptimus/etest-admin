@@ -1,0 +1,169 @@
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/admin/assets/loginbg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrap-login100 {
+    width: 960px;
+    opacity: 91% !important; 
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    padding: 177px 130px 33px 95px;
+    height: 400px;
+}
+.login100-pic {
+    padding-bottom: 100px;
+    position: relative;
+}
+.login100-form {
+    width: 290px;
+}
+.login100-form-title {
+    font-family: Poppins-Bold;
+    font-size: 24px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding-bottom: 54px;
+}
+.validate-input {
+    position: relative;
+}
+.wrap-input100 {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.input100 {
+    font-family: Kanit;
+    font-size: 15px;
+    line-height: 1.5;
+    height: 50px;
+    padding: 0 30px 0 40px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    width:300px;
+}
+input {
+    outline: none;
+    border: none;
+}
+.focus-input100 {
+    display: block;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 0px 0px;
+    color: rgba(87,184,70, 0.8);
+}
+.symbol-input100 {
+    font-size: 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 35px;
+    pointer-events: none;
+    color: #666666;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.login100-form-btn {
+    font-family: Kanit;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+    text-transform: uppercase;
+    width: 60%;
+    height: 50px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    background: #2D9CDB;
+border-radius: 10px;
+}
+
+.label{
+    font-family: Kanit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #2D9CDB;
+}
+
+.border {
+    border: 3px solid #DEDEDE;
+    margin-top: -150px;
+}

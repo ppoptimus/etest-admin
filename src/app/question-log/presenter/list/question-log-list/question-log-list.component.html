@@ -1,0 +1,38 @@
+<div class="marginright">
+    <div class="a" >
+        <table mat-table [dataSource]="questionList" class="mat-elevation-z8">
+            <ng-container matColumnDef="1">
+                <th mat-header-cell *matHeaderCellDef width="15%">ลำดับ</th>
+                <td mat-cell *matCellDef="let course; let i = index"> {{course.index}}</td>
+            </ng-container>
+            <ng-container matColumnDef="2">
+                <th mat-header-cell *matHeaderCellDef width="30%">สาขา</th>
+                <td mat-cell *matCellDef="let course"> {{course.course_name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="3">
+                <th mat-header-cell *matHeaderCellDef width="10%">ระดับ</th>
+                <td mat-cell *matCellDef="let course"> {{course.level}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="4">
+                <th mat-header-cell *matHeaderCellDef width="15%">จำนวนเรื่อง</th>
+                <td mat-cell *matCellDef="let course"> {{course.no_of_topics}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="5">
+                <th mat-header-cell *matHeaderCellDef width="15%">จำนวนคำถามทั้งหมด</th>
+                <td mat-cell *matCellDef="let course"> {{course.no_of_questions}}</td>
+            </ng-container>
+            <ng-container matColumnDef="6">
+                <th mat-header-cell *matHeaderCellDef width="15%">จัดการคำถาม</th>
+                <td mat-cell *matCellDef="let course">
+                    <mat-icon style="cursor: pointer;" [routerLink]="['/question-log',course.course_id]">search</mat-icon>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="column"></tr>
+            <tr mat-row *matRowDef="let row; columns: column;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

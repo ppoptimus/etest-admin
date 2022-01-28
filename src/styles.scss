@@ -1,0 +1,246 @@
+/* You can add global styles to this file, and also import other style files */
+table{
+    font-weight: 300;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Kanit , Roboto, "Helvetica Neue", sans-serif; }
+*{
+    font-family: kanit;
+}
+.mat-expansion-panel-body {
+    padding: 0  !important; 
+  }
+.export .mat-dialog-container {
+    display: block;
+    // padding: 5px;
+    border-radius: 20px;
+    background: #EAF5FF;
+}
+
+.right {
+    justify-content: flex-start;
+    width: 100%;
+    display: flex;
+}
+.testEngineContainer{
+    font-family: 'Prompt', sans-serif;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    // height: 100%;
+    width: 100%;
+    // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.whiteBackground{
+    background-color: #FFFFFF;
+    max-height: 1550px;
+    // height: 100%;
+    
+}
+.margin20PX{
+    margin: 20px;
+}
+.lightGreenBackground{
+    background: linear-gradient(180deg, #1A8CBA 0%, #2BBEEE 100%);
+}
+.whiteGreyBackground{
+    background: #FBFBFB;
+}
+.height250PX{
+    height: 250px;
+}
+.height200PX{
+    height: 200px;
+}
+.height50PX{
+    height: 50px;
+}
+.boxShader{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.borderRadius7PX{
+    border-radius: 7px;
+}
+.borderBottomRLRadius25PX{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.marinLR20PX{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.marinLR50PX{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.marinTB20PX{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.textRight{
+    text-align: right;
+}
+.fontSize40{
+    font-size: 40px;
+    font-family: Kanit;
+}
+.fontSize30{
+    font-size: 25px;
+    font-family: Kanit;
+    word-break: break-word;
+    line-height: 28px;
+    font-weight: 300;
+}
+
+.fontSize31{
+    font-size: 25px;
+    font-family: Kanit;
+    word-break: break-word;
+    // line-height: 28px;
+    font-weight: 300;
+}
+.fontSize20{
+    font-size: 16px;
+    font-family: Kanit;
+    font-weight: 300;
+}
+.fontSize21{
+    font-size: 16px;
+    font-family: Kanit;
+    // font-weight: 300;
+}
+.redFont{
+    color: #FB4E4E;
+}
+.greenFont{
+    color: rgb(0, 189, 116);
+}
+.blueFont{
+    color: #2D9CDB;
+}
+.yellowFont{
+    color: #FBC04E;;
+}
+.borderBTMGrey{
+    border-bottom-style: groove;
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    border-bottom-width: 2px;
+}
+.marginL40PX{
+    margin-left: 40px;
+}
+.marginBNegative5PX{
+    margin-bottom: -5px;
+}
+.float{
+    float: left;
+}
+.paddingR50PX{
+    padding-right: 50px;
+}
+.paddingT20PX{
+    padding-top: 20px;
+}
+.paddingT10PX{
+    padding-top: 10px;
+}
+.NextPrevious{
+    background: rgba(45, 156, 219, 0.2);
+    border-radius: 10px;
+}
+.profileButton{
+    background-color: #2D9CDB;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    // max-width: 150px;
+    // margin: auto;
+    border-radius: 10px;
+}
+.editTestButton{
+    background-color: #FBC04E;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.backBut{
+    background-color: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.finishTestButton{
+    background-color: rgb(0, 189, 116);;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.successCheckBtn{
+    background: #C1E6FC;
+    border: 3px solid #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+.successCheckBtn:hover{
+    background: #aed1e6;
+}
+.removeTestButton{
+    background-color: #FB4E4E;;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.whiteFont{
+    color:  #ffffff;
+}
+.greyFont{
+    color: rgba(3, 66, 102, 0.5);
+}
+.marginT50PX{
+    margin-top: 50px;
+}
+.marginLR30PX{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.marginLR20PX{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.marginT40PX{
+    margin-top: 40px;
+}
+.margin5PX{
+    margin: 5px !important;
+}
+.margin20PX{
+    margin: 20px !important;
+}
+.testCheckBox{
+    // margin-top: 30px;
+    border: 0.2px solid #c5c5c5;
+}
+.textCenter{
+    text-align: center;
+}
+
+.width150PX{
+    width: 150px;
+}
+.textLeft{
+    text-align: left;
+}
+.mat-row:hover {
+    // cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.12);
+    transition: all 500ms;
+}
+
+.tox-notifications-container{
+    display: none !important;
+}
+
+:focus {outline:0 !important;}
+
+.questionDialog .mat-dialog-container {
+    padding: 0;
+}
+
+
+

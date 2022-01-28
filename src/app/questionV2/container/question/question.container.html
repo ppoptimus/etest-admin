@@ -1,0 +1,12 @@
+<div class="container">
+    <search-question
+        [occList]="occList$ | async"
+        (searchOc)="onSearchOc($event)"
+        (search)="onSearch($event)">
+    </search-question>
+    <list-question
+        [questionList]="questionList$ | async"
+        (getApp)="onGetApp()"
+        (getNonApp)="onGetNonApp()">
+    </list-question>
+</div>

@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="space-around" mat-dialog-actions>
+    <button class="size" mat-raised-button style="font-family: Kanit;"[mat-dialog-close]="" (click)="onCancelClick()" [routerLink]="['/addquestion',data.topicData.course_id,data.topicData.topic_id]" [mat-dialog-close]>ข้อสอบปรนัย</button>  
+    <button class="size1" mat-raised-button style="font-family: Kanit;" (click)="onCancelClick()" [routerLink]="['/addmatchquestion/',data.topicData.course_id,data.topicData.topic_id]" [mat-dialog-close]>ข้อสอบแบบจับคู่</button>
+
+    </div>
+   

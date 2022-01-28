@@ -1,0 +1,72 @@
+<div class="container">
+  <mat-drawer-container class="sidenav-container">
+    <mat-drawer mode="side" opened #drawer class="drawer">
+      <mat-nav-list style="height: 0px;">
+        <h3 class="header" routerLink="/home">กรมพัฒนาฝีมือแรงงาน</h3>
+        <mat-divider class="border"></mat-divider>
+        <ng-container>
+          <div>
+            <a class="font" mat-list-item routerLink="/course" *ngIf="checkRole('สร้างสาขา')">
+              <mat-icon mat-list-icon>add_box</mat-icon>สร้างสาขา
+            </a>
+            <a class="font" mat-list-item routerLink="/question" *ngIf="checkRole('สร้างคำถาม')">
+              <mat-icon mat-list-icon>ballot</mat-icon>สร้างคำถาม
+            </a>
+            <a class="font" mat-list-item routerLink="/check" *ngIf="checkRole('ตรวจข้อสอบ')">
+              <mat-icon mat-list-icon>check</mat-icon>ตรวจข้อสอบ
+            </a>
+          </div>
+          <mat-divider class="border" ></mat-divider>
+          <div >
+            <mat-accordion *ngIf="checkRole('รายงาน')">
+              <mat-expansion-panel hideToggle class="dropdown mat-elevation-z0" style="padding: 0;">
+                <mat-expansion-panel-header class="dropdown">
+                  <mat-panel-title>
+                    <a class="font" mat-list-item style="width: 300px;">
+                      <mat-icon mat-list-icon>assessment</mat-icon>รายงาน<span class="spacer"></span>
+                      <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                    </a>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/report">
+                  <div class="right font" style="margin-left:50px;">
+                    <mat-icon mat-list-icon>assessment</mat-icon>
+                    <div style="margin-top: 6px; margin-right: 8px;">สรุปผลการทดสอบ</div>
+                  </div>
+                </a>
+                <a mat-list-item routerLink="/report-all">
+                  <div class="right font" style="margin-left:50px;">
+                    <mat-icon mat-list-icon>assessment</mat-icon>
+                    <div style="margin-top: 6px;">รายงานการวิเคราะห์</div>
+                  </div>
+                </a>
+                <a mat-list-item routerLink="/exam-result">
+                  <div class="right font" style="margin-left:50px;">
+                    <mat-icon mat-list-icon>assessment</mat-icon>
+                    <div style="margin-top: 6px;">ดูผลสอบย้อนหลัง</div>
+                  </div>
+                </a>
+              </mat-expansion-panel>
+            </mat-accordion>
+            <a class="font" mat-list-item routerLink="/setting" *ngIf="checkRole('ตั้งค่า')">
+              <mat-icon mat-list-icon>settings_applications</mat-icon>ตั้งค่า
+            </a>
+            <a class="font" mat-list-item routerLink="/question-log" *ngIf="checkRole('ดูคะแนนสอบย้อนหลัง')">
+              <mat-icon mat-list-icon>history</mat-icon>ดู Log คำถาม
+            </a>
+          </div>
+          <mat-divider class="border"></mat-divider>
+          <a class="font" mat-list-item style="pointer-events:none;">
+            {{role.full_name}}
+          </a>
+          <a class="font" mat-list-item (click)="onLogout()">
+            <mat-icon mat-list-icon>cancel</mat-icon>ออกจากระบบ
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="drawercontent">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

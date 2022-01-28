@@ -1,0 +1,14 @@
+<div class="container">
+    <report-search 
+        (search)="onSearch($event)"
+        >
+    </report-search>
+    <report-list *ngIf="!isSearch"
+        [reportList]="reportList$ | async"
+        (reportLocation)="onReportLocation($event)" >
+    </report-list>
+    <report-search-list *ngIf="isSearch"
+        [reportSearchList]="reportSearchList$ | async"
+        [query]="query$">
+    </report-search-list>
+</div>

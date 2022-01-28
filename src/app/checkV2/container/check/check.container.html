@@ -1,0 +1,17 @@
+<div class="container">
+    <search-check 
+        [occList]="occList$ | async"
+        (onSearhOc)="searchOc($event)"
+        (onFilter)="filter($event)"
+        >
+    </search-check>
+    <list-check 
+        [checkList]="checkList$ | async" 
+        (onCheckSuspend)="checkSuspend()" 
+        (onCheck)="check()"
+        (onCancelSuspend)="cancelSuspend($event)"
+        (onCheckChoice)="checkChoice()"
+        (onCancelQuestion)="cancelQuestion($event)"
+        >
+    </list-check>
+</div>

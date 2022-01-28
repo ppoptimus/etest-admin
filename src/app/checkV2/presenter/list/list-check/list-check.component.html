@@ -1,0 +1,112 @@
+<div class="marginright">
+    <div style="padding-top: 10px;">
+        <mat-button-toggle-group #group="matButtonToggleGroup" value="left" style="border-color: transparent;">
+            <mat-button-toggle value="left" style="width: 150px;" (click)="check()">
+                ข้อสอบ
+            </mat-button-toggle>
+            <span style="padding-left: 0px;"></span>
+            <mat-button-toggle value="center" style="width: 150px;" (click)="checkSuspend()">
+                ข้อสอบที่ถูกระงับ
+            </mat-button-toggle>
+            <span style="padding-left: 0px;"></span>
+            <mat-button-toggle style="width: 150px;" value="choice" (click)="checkChoice()">
+                คำถามที่ถูกระงับ
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+        <div class="a" *ngIf="group.value != 'choice' " >
+            <table mat-table [dataSource]="checkList" class="mat-elevation-z8" id="ExampleTable">
+                <ng-container matColumnDef="1">
+                    <th mat-header-cell *matHeaderCellDef width="10%">ลำดับ</th>
+                    <td mat-cell *matCellDef="let course; "> {{course.index}}</td>
+                </ng-container>
+                <ng-container matColumnDef="2">
+                    <th mat-header-cell *matHeaderCellDef width="30%">สาขา</th>
+                    <td mat-cell *matCellDef="let course"> {{course.course_name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="3">
+                    <th mat-header-cell *matHeaderCellDef width="10%">ระดับ</th>
+                    <td mat-cell *matCellDef="let course"> {{course.level}}</td>
+                </ng-container>
+                <ng-container matColumnDef="4">
+                    <th mat-header-cell *matHeaderCellDef width="15%" style="text-align: center;">
+                        จำนวนเรื่อง</th>
+                    <td mat-cell *matCellDef="let course" style="text-align: center;">{{course.no_of_topics}}</td>
+                </ng-container>
+                <ng-container matColumnDef="5">
+                    <th mat-header-cell *matHeaderCellDef width="15%">สถานะการตรวจ</th>
+                    <td mat-cell *matCellDef="let course">
+                        <span *ngIf="course.is_approve == true" style="color: rgb(13, 179, 13);">ตรวจสอบแล้ว</span>
+                        <span *ngIf="course.is_approve == null">ยังไม่ได้ตรวจสอบ</span>
+                        <span *ngIf="course.is_approve == false">ยังไม่ได้ตรวจสอบ</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="6">
+                    <th mat-header-cell *matHeaderCellDef width="10%">ตรวจข้อสอบ</th>
+                    <td mat-cell *matCellDef="let course">
+                        <mat-icon *ngIf="course.is_use != false" style="cursor: pointer;"
+                            [routerLink]="['/check',course.course_id]">search</mat-icon>
+                        <span *ngIf="course.is_use == false" style="color: red; cursor: pointer;"
+                            (click)="cancelSuspend(course)">ยกเลิกการระงับ</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="7">
+                    <th mat-header-cell *matHeaderCellDef width="20%" style="text-align: center;">สถานะอนุมัติ</th>
+                    <td mat-cell *matCellDef="let course" style="text-align: center;">
+                        <mat-slide-toggle *ngIf="course.is_use != false && course.is_approve != false" [checked]="course.is_use == true" (change)="useExam($event,course)"></mat-slide-toggle>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="column"></tr>
+                <tr mat-row *matRowDef="let row; columns: column;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5 ,10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+        <div class="a" *ngIf="group.value == 'choice' " >
+            <table mat-table [dataSource]="checkList" class="mat-elevation-z8" id="ExampleTable">
+                <ng-container matColumnDef="1">
+                    <th mat-header-cell *matHeaderCellDef width="10%">ลำดับ</th>
+                    <td mat-cell *matCellDef="let course; let i = index"> {{course.index}}</td>
+                </ng-container>
+                <ng-container matColumnDef="2">
+                    <th mat-header-cell *matHeaderCellDef width="40%">ชื่อคำถาม</th>
+                    <td mat-cell *matCellDef="let course" >
+                        <span [innerHTML]="course.question_name"></span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="3">
+                    <th mat-header-cell *matHeaderCellDef width="10%">สาขา</th>
+                    <td mat-cell *matCellDef="let course">
+                        <span>{{course.course_name}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="4">
+                    <th mat-header-cell *matHeaderCellDef width="10%">เรื่อง</th>
+                    <td mat-cell *matCellDef="let course">
+                        <span>{{course.topic_name}}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="5">
+                    <th mat-header-cell *matHeaderCellDef width="10%" style="text-align: center;">ประเภทคำถาม</th>
+                    <td mat-cell *matCellDef="let course" style="text-align: center;"> 
+                        <span *ngIf="course.is_match == false">ปรนัย</span>
+                        <span *ngIf="course.is_match == true">จับคู่</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="6">
+                    <th mat-header-cell *matHeaderCellDef width="10%" style="text-align: center;">หมายเหตุ</th>
+                    <td mat-cell *matCellDef="let course" style="text-align: center;" [innerHTML]="course.remark"></td>
+                </ng-container>
+                <ng-container matColumnDef="7">
+                    <th mat-header-cell *matHeaderCellDef width="10%" style="text-align: center;">จัดการคำถาม</th>
+                    <td mat-cell *matCellDef="let course" style="text-align: center;">
+                        <span  style="color: red; cursor: pointer;"(click)="cancelQuestion(course)">ยกเลิกการระงับ</span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="question"></tr>
+                <tr mat-row *matRowDef="let row; columns: question;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5 ,10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>
+

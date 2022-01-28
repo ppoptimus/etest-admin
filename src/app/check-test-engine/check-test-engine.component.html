@@ -1,0 +1,348 @@
+<div class="testEngineContainer whiteBackground secondIndex">
+    <div class="lightGreenBackground borderBottomRLRadius25PX" style="margin-top: -10px;">
+        <div class="marinLR50PX">
+            <div fxLayout>
+                <div fxFlex="10%" class="marinTB20PX">
+                    <button mat-icon-button class="float" *ngIf="button ==='yes'">
+                        <mat-icon (click)="toggle()">menu</mat-icon>
+                    </button>
+                    <button mat-icon-button class="float" *ngIf="button ==='no'">
+                        <mat-icon (click)="toggle()">menu</mat-icon>
+                    </button>
+                    <span class="fontSize31 float" style="padding-top:10px">เมนู</span>
+
+                </div>
+                <div fxFlex="90%" class="textRight" style="margin-top: 30px; word-wrap: break-word;" fxLayout="row"
+                    fxLayoutAlign="space-between">
+                    <span class="fontSize21 " style="word-wrap: break-word;"><span class="greyFont">สาขา </span>{{topic?.course_name}}</span>
+                    <span class="fontSize21 " style="word-wrap: break-word;"><span class="greyFont">เรื่อง
+                        </span>{{topic?.topic_name}} </span>
+                    <button class="successCheckBtn width150PX fontSize20" style=" height: 50px;
+               
+                    margin-left: 10px;
+                    margin-top: -10px;" (click)="endquestion()"
+                        [routerLink]="['/result',questionid?.topic_id]">ส่งข้อสอบ</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="margin20PX">
+        <div class="marinLR50PX">
+            <div fxLayout>
+                <div fxFlex="80%" class="marinTB20PX">
+                    <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="edit ==='no'"
+                        style="margin-bottom: -50px;">
+                        <div class="marinTB20PX float ">
+                            <button mat-button class="NextPrevious" style="margin-left:-50px;z-index:10;width: 30px;"
+                                (click)="prevquestion()">
+                                <mat-icon>skip_previous</mat-icon>
+                            </button>
+                        </div>
+                        <p class="textCenter fontSize30" [innerHTML]="questionid?.question?.question_name | safeurl"></p>
+                        <div class="marinTB20PX float ">
+                            <button mat-button class="NextPrevious" style="margin-right:20px;z-index:10;width: 30px;"
+                                (click)="nextquestion()">
+                                <mat-icon>skip_next</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="height: 600px; ">
+                        <mat-radio-group *ngIf="questionid?.question?.is_match == false">
+                            <div fxLayout="row wrap" *ngIf="edit ==='no'">
+                                <div fxFlex="50%" *ngFor="let choice of questionid?.question.choices;let i =index;"
+                                    style="margin-bottom: 20px;" >
+                                    <div class="choiceContainer">
+                                        <div class="marginT50PX marginLR30PX pic">
+                                                <mat-radio-button [value]="choice"
+                                                [checked]="choice.is_correct">
+                                            </mat-radio-button>
+                                            <span (click)="showPicture(choice.choice_name)"
+                                            style="font-family: 'Kanit'; font-size: 20px; font-weight: 300; word-wrap: break-word;"
+                                            [innerHTML]="choice.choice_name | safeurl"></span>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-radio-group>
+
+                        <div fxLayout="row" *ngIf="questionid?.question?.is_match == true">
+                            <div fxFlex=50 fxLayout="column" *ngIf="edit ==='no'">
+                                <div *ngFor="let x of questionid?.question.question_matches; let i = index;" style="margin-bottom: 20px;">
+                                    <div class="matchcontainer1 pic" fxLayout="row" fxLayoutAlign="space-between center">
+                                        <span style="font-family: 'Kanit'; font-size: 20px; word-wrap: break-word; margin-left: 10px; margin-right: 10px;"
+                                                [innerHTML]="x.question_name | safeurl" (click)="showPicture(x.question_name)"></span>
+                                            <select style="margin-right: 10px;" [(ngModel)]="x.correct_choice_id">
+                                                <option *ngFor="let choice of questionid?.question.choices; let i = index" [value]="choice.choice_id">
+                                                    {{textthai[i]}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxFlex=50 fxLayout="column" *ngIf="edit ==='no'">
+                                <div *ngFor="let x of questionid?.question.choices;let i = index;" style="margin-bottom: 20px;">
+                                    <div class="matchcontainer1 pic" fxLayout="row" fxLayoutAlign="space-between center">
+                                    <span style="font-family: 'Kanit'; font-size: 20px; word-wrap: break-word; margin-left: 10px; margin-right: 10px;"
+                                            [innerHTML]="x.choice_name | safeurl"
+                                            (click)="showPicture(x.choice_name)"
+                                            ></span>
+                                            <select style="margin-right: 10px; opacity: 0%; pointer-events: none;" >
+                                                <option >
+                                                    
+                                                </option>
+                                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="remark" *ngIf="questionid?.question?.is_approve === false" style="margin-top: 50px;">
+                            <mat-label fxLayout="row" fxLayoutAlign="center" class="remarkheader">
+                                คำถามข้อนี้ถูกระงับใช้งาน</mat-label>
+                            <br>
+                            <mat-label style="margin-left: 20px; margin-bottom: 5px; color: #5B5B5B;">
+                                หมายเหตุที่ใช้ระงับคำถาม</mat-label>
+                            <div class="remarkcontent">
+                                <p style="margin-left: 10px; font-size: 20px; font-style: Kanit;">{{questionid.question.remark}}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="edit ==='yes'">
+                            <ng-container *ngIf="questiondata.is_match != true">
+                                <form [formGroup]="form" style="margin-right: 10px; margin-left: 10px;">
+                                    <div style="padding-top: 10px;"></div>
+                                    <editor formControlName="question_name" [init]="tinymceInit"></editor>
+                                    <ng-container formArrayName="choices">
+                                      <ng-container *ngFor="let item of form['controls']['choices']['controls'];let i = index" [formGroupName]="i">
+                                        <br>
+                                        <mat-label style="font-size: 24px;">คำตอบ {{textthai[i]}}</mat-label>
+                                        <div style="padding-top: 10px;"></div>
+                                        <editor formControlName="choice_name" [init]="tinymceInit"></editor>
+                                      </ng-container>
+                                    </ng-container>
+                                    <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px;">
+                                      <span class="spacer"></span>
+                                      <button class="save" mat-raised-button (click)="addForm()">เพิ่มคำตอบ</button>
+                                    </div>
+                                  </form>
+                                
+                                  <div class="a" style="margin-top: 10px;">
+                                    <mat-table [dataSource]="table" class="mat-elevation-z8">
+                                      <ng-container matColumnDef="id">
+                                        <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index"> {{textthai[i]}} </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="name">
+                                        <mat-header-cell *matHeaderCellDef> คำตอบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q" [innerHTML]="q.choice_name | safeurl"> </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="answer">
+                                        <mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;คำตอบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index">&nbsp;&nbsp;&nbsp; <mat-radio-button [value]="true"
+                                            [checked]="getForm.at(i).get('is_correct').value" (change)="check(i,$event)"></mat-radio-button>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="random">
+                                        <mat-header-cell *matHeaderCellDef> ไม่ให้สลับช้อย </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index">&nbsp;&nbsp;&nbsp;<mat-checkbox
+                                            [checked]="getForm.at(i).get('is_random').value" (change)="check1(i,$event)"></mat-checkbox>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="delete">
+                                        <mat-header-cell *matHeaderCellDef> ลบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let index = index">
+                                          <mat-icon style="color: red; cursor: pointer" (click)="remove(index)">delete_forever</mat-icon>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                    </mat-table>
+                                    <div fxLayout="row" fxLayoutAlign="space-evenly center" style="margin-top: 50px; margin-bottom: 10px;">
+                                      <button class="save" mat-raised-button (click)="update()">บันทึก</button>
+                                      <button class="cancel"  mat-raised-button (click)="cancel()">ยกเลิก</button>
+                                    </div>
+                                  </div>
+                            </ng-container>
+                             
+                              
+                              
+                              
+                              <div class="marginright" *ngIf="questiondata?.is_match == true">
+                                <form [formGroup]="form">
+                                  <br>
+                                  <mat-label style="font-size: 24px;">คำถาม</mat-label>
+                                  <div style="padding-top: 10px;"></div>
+                                  <editor formControlName="question_name" [init]="tinymceInit"></editor>
+                                  <div class="leftanswer">
+                                    <br>
+                                    <mat-label style="font-size: 24px;">คำตอบฝั่งซ้าย</mat-label>
+                                    <ng-container formArrayName="question_matches">
+                                      <ng-container *ngFor="let x of form['controls']['question_matches']['controls']; let i = index" [formGroupName]="i">
+                                        <editor formControlName="question_name" [init]="tinymceInit"></editor>
+                                      </ng-container>
+                                    </ng-container>
+                                    <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px;">
+                                      <span class="spacer"></span>
+                                      <button class="save" mat-raised-button (click)="addLeftForm()" *ngIf="!resData">เพิ่มคำตอบฝั่งซ้าย</button>
+                                    </div>
+                                  </div>
+                              
+                              
+                                  <div class="leftanswer">
+                                    <br>
+                                    <mat-label style="font-size: 24px;">คำตอบฝั่งขวา</mat-label>
+                                    <ng-container formArrayName="choices">
+                                      <ng-container *ngFor="let item of form['controls']['choices']['controls'];let i = index"
+                                        [formGroupName]="i">
+                                        <div style="padding-top: 10px;"></div>
+                                        <editor formControlName="choice_name" [init]="tinymceInit"></editor>
+                                      </ng-container>
+                                    </ng-container>
+                                    <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px;">
+                                      <span class="spacer"></span>
+                                      <button class="save" mat-raised-button (click)="addForm()" *ngIf="!resData">เพิ่มคำตอบฝั่งขวา</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                  <div style="margin-top: 10px; width: 48%;">
+                                    <mat-table [dataSource]="displayMatch" class="mat-elevation-z8">
+                                      <ng-container matColumnDef="1">
+                                        <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index"> {{i+1}} </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="2">
+                                        <mat-header-cell *matHeaderCellDef> คำตอบฝั่งซ้าย </mat-header-cell>
+                                        <mat-cell *matCellDef="let q" [innerHTML]="q.question_name | safeurl"></mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="3">
+                                        <mat-header-cell *matHeaderCellDef> คำตอบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let index = index">
+                              
+                                          <mat-form-field appearance="outline" style="width: 70%;" >
+                                            <mat-label></mat-label>
+                                            <mat-select [disabled]="!resData" [(ngModel)]="q.correct_choice_id" (selectionChange)="leftChange(index,$event)">
+                                              <mat-option *ngFor="let x of table; let i = index" [value]="x.choice_id">
+                                                {{textthai[i]}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                              
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="4">
+                                        <mat-header-cell *matHeaderCellDef> ลบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let index = index">
+                                          <mat-icon (click)="removeChoice(index)" style="color: red; cursor: pointer">delete_forever</mat-icon>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <mat-header-row *matHeaderRowDef="leftColumns"></mat-header-row>
+                                      <mat-row *matRowDef="let row; columns: leftColumns;"></mat-row>
+                                    </mat-table>
+                                  </div>
+                              
+                              
+                                  <div  style="margin-top: 10px; width: 48%;">
+                                    <mat-table [dataSource]="table" class="mat-elevation-z8">
+                                      <ng-container matColumnDef="1">
+                                        <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index"> {{textthai[i]}} </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="2">
+                                        <mat-header-cell *matHeaderCellDef> คำตอบฝั่งขวา </mat-header-cell>
+                                        <mat-cell *matCellDef="let q" [innerHTML]="q.choice_name | safeurl"> </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="3">
+                                        <mat-header-cell *matHeaderCellDef> ไม่ให้สลับช้อย </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let i = index">&nbsp;&nbsp;&nbsp;<mat-checkbox
+                                            [checked]="getForm.at(i).get('is_random').value" (change)="check1(i,$event)"></mat-checkbox>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="4">
+                                        <mat-header-cell *matHeaderCellDef> ลบ </mat-header-cell>
+                                        <mat-cell *matCellDef="let q; let index = index">
+                                          <mat-icon (click)="remove(index)" style="color: red; cursor: pointer">delete_forever</mat-icon>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <mat-header-row *matHeaderRowDef="column"></mat-header-row>
+                                      <mat-row *matRowDef="let row; columns: column;"></mat-row>
+                                    </mat-table>
+                                  </div>
+                                </div>
+                              
+                                <div fxLayout="row" fxLayoutAlign="space-evenly center" style="margin-top: 50px;">
+                                  <button class="save" mat-raised-button (click)="saveQuestion()" *ngIf="!resData" >บันทึกคำถามเพื่อเลือกคำตอบของช้อยส์</button>
+                                  <button class="save" mat-raised-button (click)="update()" *ngIf="resData">บันทึก</button>
+                                  <button class="cancel" mat-raised-button (click)="cancel()">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div fxFlex="250px">
+                    <div class=" textCenter">
+
+                        <h1> <b>ข้อ {{questionid?.question?.question_no}} / {{questionid?.questions?.length }} </b></h1>
+                        <h3><b></b>ข้อสอบที่ยังไม่ได้ตรวจ : <b><span
+                                    class="redFont">{{questionid?.no_of_unchecks}}</span></b> ข้อ</h3>
+
+                        <!-- <p><mat-icon class="float redFont">indeterminate_check_box</mat-icon>คำถามถูกระงับการใช้งาน</p> -->
+                    </div>
+                    <div class="marinTB20PX testCheckBox borderRadius7PX"
+                        style="overflow:auto; height: 400px;z-index: 0;">
+                        <div
+                            style="height: 215px;width:200px;margin-left: 21px;margin-top:10px; overflow: auto; max-height: 400px;">
+                            <div fxLayout="row wrap">
+                                <div *ngFor="let review of question; let i = index"
+                                    style="margin-top: -10px; margin-bottom: -5px">
+                                    <button mat-icon-button style="display: flex;" (click)="goto(review.question_no)">
+                                        <mat-icon *ngIf="question[i].is_approve==true" class="textLeft"
+                                            style="color: rgb(0, 189, 116);">
+                                            check_box
+                                        </mat-icon>
+                                        <mat-icon *ngIf="question[i].is_approve==null" class="lightGreenFont textLeft">
+                                            check_box_outline_blank
+                                        </mat-icon>
+                                        <mat-icon *ngIf="question[i].is_approve==false" class="textLeft"
+                                            style="color:red;">
+                                            indeterminate_check_box
+                                        </mat-icon>
+                                        <span class="blackFont">{{[i+1]}}</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="margin20PX textCenter">
+                            <hr>
+                            <button mat-button class="editTestButton whiteFont width150PX margin5PX"
+                                (click)="editquestion()">แก้ไขคำถาม</button>
+                            <button mat-button class="removeTestButton whiteFont width150PX margin5PX"
+                                (click)="suspend()">ระงับใช้คำถาม</button>
+                            <button mat-button class="profileButton whiteFont width150PX margin5PX"
+                                (click)="confirm()">ยืนยันคำถาม</button>
+
+                        </div>
+
+                    </div>
+                    <div class="marginLR20PX">
+                        <p>
+                            <mat-icon class="float greenFont">check_box</mat-icon>คำถามถูกตรวจสอบเรียบร้อย
+                        </p>
+                        <!-- <p><mat-icon class="float yellowFont">check_box</mat-icon>คำถามยังไม่ถูกตรวจสอบ</p> -->
+                        <p>
+                            <mat-icon class="float lightGreenFont">check_box_outline_blank</mat-icon>
+                            คำถามยังไม่ถูกตรวจสอบ
+                        </p>
+                        <p>
+                            <mat-icon class="float redFont">indeterminate_check_box</mat-icon>คำถามถูกระงับการใช้งาน
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

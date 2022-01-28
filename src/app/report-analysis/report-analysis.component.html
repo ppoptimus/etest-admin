@@ -1,0 +1,130 @@
+<div class="container">
+    <mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-toolbar-row>
+          <p >รายงานการวิเคราะห์</p>
+        <span class="spacer"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+      <div class="marginright">
+        <div style="padding-top: 10px;" class="content">
+            <div fxLayoutAlign="space-between center" fxlayout="row">
+              <div fxFlex="52">
+                <div fxLayout="column" >
+                  <p class="header">รายงานการวิเคราะห์</p>
+                  <mat-form-field appearance="outline" style="width: 100%;" name="report">
+                      <mat-label >หัวข้อรายงาน</mat-label>
+                      <mat-select #report >
+                        <mat-option *ngFor="let report of reports" [value]="report.value">{{report.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+              </div>
+           <div fxFlex="45" fxLayoutAlign="space-between center" fxLayout="row">
+            <div fxLayout="column">
+              <p class="header">วันเริ่มต้น</p>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>วันเริ่มต้น</mat-label>
+                <input matInput [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 color="primary"></mat-datepicker>
+              </mat-form-field>
+            </div>
+              
+            <div fxLayout="column" >
+                <p class="header">วันสิ้นสุด</p>
+                <mat-form-field appearance="outline"   style="width: 100%;">
+                  <mat-label>วันสิ้นสุด</mat-label>
+                  <input matInput [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                </mat-form-field>
+              </div>
+           </div>
+           
+            </div>
+             <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayout="column" fxFlex="52">
+                <p class="header">กลุ่มสาขาอาชีพ</p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label >สาขา</mat-label>
+                    <mat-select >
+                      <mat-option *ngFor="let occu of this.occu" [value]="this.occu.occupation_group_id">
+                        {{this.occu.occupation_group_name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="45">
+                  <p class="header">สาขา</p>
+                  <mat-form-field appearance="outline" style="width: 100%;">
+                      <mat-label >สาขา</mat-label>
+                      <mat-select >
+                        <mat-option *ngFor="let course of this.course" [value]="this.course.course_id">
+                          {{this.course.course_name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+            </div>
+            <div fxLayoutAlign="end" style="margin-right: 25px;"> <button mat-raised-button class="searchbutton">ค้นหา</button> </div>
+        </div>
+
+        <!-- ความเที่ยงตรง -->
+        <div class="table" *ngIf="report.value == '1'">
+          <table mat-table [dataSource]="course" class="mat-elevation-z8">
+            <ng-container matColumnDef="course" >
+              <th mat-header-cell *matHeaderCellDef> สาขา </th>
+              <td mat-cell *matCellDef="let course"> {{course.course_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef style="width: 40%;"> ระดับ </th>
+              <td mat-cell *matCellDef="let course"> {{course.level}} </td>
+            </ng-container>
+            <ng-container matColumnDef="info" >
+              <th mat-header-cell *matHeaderCellDef style="width: 20%;"> ดูข้อมูลเพิ่มเติม </th>
+              <td mat-cell *matCellDef="let course"> <p style="cursor: pointer;" routerLink="/report/report_form">ข้อมูล</p> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="table"></tr>
+            <tr mat-row *matRowDef="let row; columns: table;"></tr>
+          </table>
+        </div>
+        <!-- ความเชื่อมั่น -->
+        <div class="table" *ngIf="report.value == '2'">
+          <table mat-table [dataSource]="course" class="mat-elevation-z8">
+            <ng-container matColumnDef="course" >
+              <th mat-header-cell *matHeaderCellDef> สาขา </th>
+              <td mat-cell *matCellDef="let course"> {{course.course_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef style="width: 40%;"> ระดับ </th>
+              <td mat-cell *matCellDef="let course"> {{course.level}} </td>
+            </ng-container>
+            <ng-container matColumnDef="info" >
+              <th mat-header-cell *matHeaderCellDef style="width: 20%;"> ดูข้อมูลเพิ่มเติม </th>
+              <td mat-cell *matCellDef="let course"> <p style="cursor: pointer;" routerLink="/report/report_trust">ข้อมูล</p> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="table"></tr>
+            <tr mat-row *matRowDef="let row; columns: table;"></tr>
+          </table>
+        </div>
+        <!-- ความยากง่าย -->
+        <div class="table" *ngIf="report.value == '3'">
+          <table mat-table [dataSource]="course" class="mat-elevation-z8">
+            <ng-container matColumnDef="course" >
+              <th mat-header-cell *matHeaderCellDef> สาขา </th>
+              <td mat-cell *matCellDef="let course"> {{course.course_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef style="width: 40%;"> ระดับ </th>
+              <td mat-cell *matCellDef="let course"> {{course.level}} </td>
+            </ng-container>
+            <ng-container matColumnDef="info" >
+              <th mat-header-cell *matHeaderCellDef style="width: 20%;"> ดูข้อมูลเพิ่มเติม </th>
+              <td mat-cell *matCellDef="let course"> <p style="cursor: pointer;" routerLink="/report/report_level">ข้อมูล</p> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="table"></tr>
+            <tr mat-row *matRowDef="let row; columns: table;"></tr>
+          </table>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="marginright">
+    <div style="padding-top: 10px;" >
+        <div fxLayoutAlign="space-between center">
+            <span></span>
+            <p style="font-size: 36px; padding-top:10px; padding-bottom: 20px; padding-left: 60px;">
+                รายงานสรุปผลการทดสอบภาพรวมทั้งหมด</p>
+            <button mat-raised-button style="margin-bottom: 20px; margin-right: 10px; background: #FBC04E;"
+                (click)="exportDialog()">Export</button>
+        </div>
+        <div fxLayoutAlign="space-around center" fxlayout="row" style="padding-bottom: 20px; ">
+            <mat-card class="card1">
+                <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #1A8CBA;
+                  ">จำนวนผู้สมัครทั้งหมด</mat-card-title>
+                <hr>
+                <mat-card-content>
+                    <p style="font-size: 72px; margin-top:75px;">
+                        {{reportList?.total_test}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card2">
+                <mat-card-title style="padding-top: 10px; padding-bottom: 10px;color: #04C000;">จำนวนผู้มาทดสอบ
+                </mat-card-title>
+                <hr>
+                <mat-card-content>
+                    <p style="font-size: 72px; margin-top:75px;">
+                        {{reportList?.take_test}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card3">
+                <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #FE0022;">จำนวนผู้ไม่มาสอบ
+                </mat-card-title>
+                <hr>
+                <mat-card-content>
+                    <p style="font-size: 72px; margin-top:75px;">
+                        {{reportList?.no_show}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="table">
+            <table mat-table [dataSource]="displayData" class="mat-elevation-z8">
+                <ng-container matColumnDef="1">
+                    <th mat-header-cell *matHeaderCellDef width="20%">หน่วยปฎิบัติ</th>
+                    <td mat-cell *matCellDef="let a"> {{a.location_name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="2">
+                    <th mat-header-cell *matHeaderCellDef width="15%">จำนวนผู้สมัคร</th>
+                    <td mat-cell *matCellDef="let a"> {{a.total_test}}</td>
+                </ng-container>
+                <ng-container matColumnDef="3">
+                    <th mat-header-cell *matHeaderCellDef width="15%">ผู้มาทดสอบ</th>
+                    <td mat-cell *matCellDef="let a"> {{a.take_test}}</td>
+                </ng-container>
+                <ng-container matColumnDef="4">
+                    <th mat-header-cell *matHeaderCellDef width="15%">ผู้ไม่มาทดสอบ</th>
+                    <td mat-cell *matCellDef="let a"> {{a.no_show}}</td>
+                </ng-container>
+                <ng-container matColumnDef="5">
+                    <th mat-header-cell *matHeaderCellDef width="15%">สอบผ่าน</th>
+                    <td mat-cell *matCellDef="let a"> {{a.passed}}</td>
+                </ng-container>
+                <ng-container matColumnDef="6">
+                    <th mat-header-cell *matHeaderCellDef width="20%">ดูข้อมูลเพิ่มเติม</th>
+                    <td mat-cell *matCellDef="let a">
+                        <a style="cursor: pointer;" (click)="locationReport(a.location_code)">ข้อมูล</a>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="column"></tr>
+                <tr mat-row *matRowDef="let row; columns: column;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

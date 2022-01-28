@@ -1,0 +1,118 @@
+<div class="container">
+  <mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-toolbar-row>
+      <p>รายงานการวิเคราะห์</p>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="marginright" *ngIf="inputform==true">
+    <div fxLayout="row" fxLayoutAlign="end end">
+      <button mat-raised-button style="background-color: orange;" (click)="export()">export</button>
+    </div>
+    
+    <div style="padding-top: 10px;" class="content">
+      <div fxLayout="column" fxLayoutAlign="space-between">
+        <p style="margin-left: 5px">กลุ่มอาชีพ</p>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>กลุ่มสาขาอาชีพ</mat-label>
+          <mat-select  (selectionChange)="setCourse($event)">
+            <mat-option *ngFor="let occupation of occupation;" [value]="occupation.occupation_group_id"
+              ngDefaultControl>
+              {{occupation.occupation_group_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <form [formGroup]="reportForm">
+          <div>
+            <div fxLayoutAlign="space-between center" fxLayout="row">
+              <p fxFlex="30" class="label">ชื่อสาขา</p>       
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>สาขา</mat-label>
+                <mat-select (selectionChange)="setTopic($event)">
+                  <mat-option *ngFor="let a of courseData;" [value]="a.course_id" >
+                    {{a.course_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayoutAlign="space-between center" fxLayout="row">
+              <p fxFlex="30" class="label">เรื่อง</p>    
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>เรื่อง</mat-label>
+                <mat-select (selectionChange)="setQuestion($event)">
+                  <mat-option *ngFor="let a of topicData;" [value]="a.topic_id">
+                    {{a.topic_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- <div fxLayoutAlign="space-between center" fxLayout="row">
+              <p fxFlex="30" class="label">วิชา</p>    
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>วิชา</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let a of questionData;" [value]="a.question_id" >
+                    {{a.question_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div> -->
+            <div fxLayoutAlign="space-between center" fxLayout="row">
+              <p fxFlex="30" class="label">จำนวนข้อทั้งหมด</p> <input fxFlex="60" formControlName="total_question" disabled
+                type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
+            </div>
+
+            <ng-container formArrayName="questions">
+              <ng-container *ngFor="let item of reportForm['controls']['questions']['controls'];let i = index"
+                [formGroupName]="i">
+                <div fxLayoutAlign="space-between center" fxLayout="row">
+                  <p fxFlex="30" class="label">ผู้เชี่ยวชาญคนที่ {{i+1}} </p>
+                  <div fxFlex="60" fxLayoutAlign="space-between center" fxLayout="row">
+                    <input formControlName="specialist_name">
+                    <button style="margin-bottom: 10px" mat-raised-button (click)="remove(i)">ลบ</button>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <div fxLayoutAlign="start" style="margin-top: 10px;">
+              <button mat-raised-button class="searchbutton" (click)="addForm()" >เพิ่มผู้เชี่ยวชาญ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div fxLayoutAlign="start" style="margin-top: 10px;"> <button mat-raised-button class="searchbutton"
+        (click)="input()" [disabled] ="reportForm.invalid">กรอกข้อมูลรายงาน</button> </div>
+  </div>
+
+  <div class="marginright" *ngIf="inputform==false">
+    <div style="padding-top: 10px;">
+        <table>
+          <thead>
+            <tr>
+              <td [attr.rowSpan]="2" style="width: 150px; text-align: center; font-size: 20px;">หัวข้อความปลอดภัยข้อสอบที่</td>
+              <td [attr.colSpan]="displayDataForm?.questions[0]?.specialist?.length" style="text-align: center; font-size: 20px; height: 30px;"> คะแนนผู้เชี่ยวชาญ (-1,0,1)</td>
+            </tr>
+            <tr>
+              <th style="width: 150px; text-align: center; font-size: 20px; height: 30px;" *ngFor="let x of displayDataForm?.questions[0].specialist">
+                {{x.specialist_name}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let question of displayDataForm?.questions; let questionIndex = index">
+              <td style="font-size: 20px; text-align: center;">{{questionIndex+1}}</td>
+              <td *ngFor="let specialist of question.specialist; let specialistIndex = index;">
+                    <input style="width: 100%; font-size: 20px; text-align: center;" type="number" maxlength=2
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode == 45 || event.charCode == 48 || event.charCode == 49"
+                    (input)="changeScore($event.target.value,questionIndex,specialistIndex)"
+                    >
+              </td>
+            </tr>
+          </tbody>  
+          </table>
+
+      <button mat-raised-button style="margin-top: 10px" class="searchbutton" (click)="result()">คำนวณ</button>
+    </div>
+  </div>

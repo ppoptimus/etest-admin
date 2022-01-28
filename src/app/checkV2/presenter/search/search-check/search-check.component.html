@@ -1,0 +1,19 @@
+<mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-toolbar-row>
+      <mat-form-field appearance="outline" style="padding-top: 40px; width:70%; font-family: kanit;" [style.fontSize.px]=13>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <input matInput placeholder="สาขาภาษาไทย"  #searchInput class="searchbar" >
+        <mat-icon matPrefix style="color: rgba(0, 0, 0, 0.5);">search</mat-icon>
+      </mat-form-field>
+      <span class="spacer"></span>
+      
+      <mat-form-field appearance="outline" style="width: 25% ; padding-top: 40px" [style.fontSize.px]=13>
+        <mat-label>กลุ่มสาขาอาชีพ</mat-label>
+        <mat-select name="occupation" (selectionChange)="searchOc($event.value)">
+          <mat-option *ngFor="let a of occList;" [value]="a.occupation_group_id" >
+            {{a.occupation_group_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-toolbar-row>
+  </mat-toolbar>

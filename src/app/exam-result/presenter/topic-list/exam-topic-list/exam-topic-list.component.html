@@ -1,0 +1,27 @@
+<table mat-table [dataSource]="data" >
+    <ng-container matColumnDef="1" >
+        <th mat-header-cell *matHeaderCellDef style="width: 40%;">ข้อ</th>
+        <td mat-cell *matCellDef="let x; "> {{x.question_no}}</td>
+    </ng-container>
+    <ng-container matColumnDef="2" >
+        <th mat-header-cell *matHeaderCellDef>คำตอบ</th>
+        <td mat-cell *matCellDef="let x">
+            <div *ngIf="x.is_correct == true" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon style="color: rgb(0, 189, 116);">check_box</mat-icon>
+            <h1 style="margin-top: 15px; font-family: kanit;">ตอบถูก</h1>
+            </div>
+            <div *ngIf="x.is_correct == null" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon style="color: rgb(197, 122, 9);">indeterminate_check_box</mat-icon>
+            <h1 style="margin-top: 15px; font-family: kanit;">ไม่ได้ตอบ</h1>
+            </div>
+            <div *ngIf="x.is_correct == false" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon style="color:red;">indeterminate_check_box</mat-icon>
+            <h1 style="margin-top: 15px; font-family: kanit;">ตอบผิด</h1>
+            </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="column"></tr>
+    <tr mat-row *matRowDef="let row; columns: column;" style="cursor: pointer;" (click)="questionInfo(row)"></tr>
+    
+</table>
+<mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

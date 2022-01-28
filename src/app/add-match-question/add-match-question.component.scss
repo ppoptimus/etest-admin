@@ -1,0 +1,135 @@
+table {
+  width: 100%;
+}
+
+.uploadbutton {
+  background-color: orange;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.error {
+  font-size: 11px;
+  color: red;
+}
+
+.toplabel {
+  font-family: Kanit;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 30px;
+  line-height: 22px;
+}
+
+.label {
+  font-family: Kanit;
+}
+
+.height {
+  height: 48px;
+  width: 159px;
+  margin-top: 13px;
+  border-radius: 200px;
+  background: #56ccf2;
+  font-family: Kanit;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  color: #131212;
+}
+
+.shadow {
+  background: #ffffff;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  height: 82px;
+}
+
+.marginright {
+  padding-left: 22px;
+  margin-top: 18px;
+  margin-right: 18px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.marginright1 {
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-top: 10px;
+}
+.mat-button-toggle {
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 4px;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #cccccc;
+}
+
+.mat-button-toggle-checked {
+  background-color: #2bbeee;
+}
+
+.a {
+  max-height: 300px;
+  overflow: auto;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+}
+
+.lefttable {
+  max-height: 300px;
+  overflow: auto;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  width: 40%;
+}
+
+.save {
+  background: #f2994a;
+  border-radius: 200px;
+  color: white;
+}
+
+.container {
+  background: #ffffff;
+  box-shadow: 0px 4px 9px #000000;
+}
+
+.leftanswer {
+  margin-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background: #d3d3d3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.input {
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 30px;
+  text-align: center;
+}
+
+:host ::ng-deep img {
+  width: 100px;
+  height: 100px;
+}
+
+:host ::ng-deep iframe {
+  width: 200px;
+  height: 100px;
+}
+
+:host ::ng-deep video {
+  width: 200px;
+  height: 100px;
+}

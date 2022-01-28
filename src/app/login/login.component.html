@@ -1,0 +1,40 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100" style="opacity: 91% !important;">
+            <div class="login100-pic" fxLayout="row" fxLayoutAlign="space-between center">
+                <img src="assets/img_99011e5007614fc48970477ee4c38942.jpg" alt="IMG">
+            </div>
+            <hr class="border">
+
+            <form [formGroup]="form" >
+                    <div class="input100">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="Username" formControlName="user_name" type="text">
+                            <mat-error *ngIf="form.get('user_name').hasError('required')">กรุณากรอก Username</mat-error>
+                          </mat-form-field>
+                    </div>
+
+
+                    <div class="input100">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="password" formControlName="password" type="password">
+                            <mat-error *ngIf="form.get('password').hasError('required')">กรุณากรอก Password</mat-error>
+                          </mat-form-field>
+                    </div>
+                <!-- <div class="text-block text-center my-3" >
+                    <span class="text-small text-danger font-weight-semibold">MSG</span>
+                  </div>  -->
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" (click)="onSubmit()">
+                        Login
+                    </button>
+                </div>
+                <div class="text-center p-t-136">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+.mat-toolbar.mat-2d9cdb {
+    background: #2d9cdb;
+    color: #fff;
+  }
+  
+  :host ::ng-deep iframe {
+    max-width: 100%;
+    max-height: 90%;
+    pointer-events: all;
+  }
+  
+  .pic span {
+    pointer-events: none;
+  }
+  
+  :host ::ng-deep img {
+    cursor: pointer;
+    max-width: 150px;
+    max-height: 150px;
+    pointer-events: all;
+  }
+  
+  :host ::ng-deep video {
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 90%;
+    pointer-events: all;
+  }
+  
+  :host ::ng-deep audio {
+    max-width: 100%;
+  }
+  
+  .choiceContainer {
+    width: 90%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+    margin: 50px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+
+  .type{
+    position: absolute;
+    margin-left: 40px;
+    margin-top:30px;
+  }
+  
+  .correct {
+      width: 90%;
+      border: 5px solid rgba(7, 182, 22, 0.733);
+      box-sizing: border-box;
+      box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      height: 100%;
+      margin: 50px;
+      margin-left: 40px;
+      margin-bottom: 10px;
+      > span {
+        pointer-events: none;
+      }
+    }
+  
+    .false {
+      width: 90%;
+      border: 5px solid rgba(230, 6, 6, 0.733);
+      box-sizing: border-box;
+      box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      height: 100%;
+      margin: 50px;
+      margin-left: 40px;
+      margin-bottom: 10px;
+    }
+  
+  .matchcontainer {
+    width: 45%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 50px;
+    height: 100%;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  
+  .matchcontainer1 {
+    width: 90%;
+    border: 5px solid rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+    margin: 50px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .correctMatch {
+    margin-right: 10px; color: black; background-color: green
+  }
+  
+  .falseMatch {
+    margin-right: 10px; color: black; background-color: red
+  }
+  
+  .marginright {
+    padding-left: 22px;
+    margin-right: 18px;
+    padding-bottom: 20px;
+  }
+  
+  .lefttable {
+    width: 45%;
+  }
+  
+  .leftanswer {
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    background: #d3d3d3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  
+  :host ::ng-deep mat-cell img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }

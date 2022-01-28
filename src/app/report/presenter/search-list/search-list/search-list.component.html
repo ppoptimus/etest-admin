@@ -1,0 +1,118 @@
+<div style="padding-top: 10px; margin: 0 10px 0 10px" >
+    <div fxLayoutAlign="space-between center" fxLayout="row">
+        <span></span>
+        <div fxLayout="column" fxLayoutAlign="space-between center">
+            <p style="font-size: 30px; padding-top:10px; padding-bottom: 20px; line-height: 30px;">
+                สรุปผลการทดสอบของ {{reportSearchList?.location_name}}</p>
+                <p style="font-size: 30px; padding-top:10px; padding-bottom: 20px; line-height: 30px;"> 
+                    วันที่ {{reportSearchList?.from_date}} - {{reportSearchList?.to_date}} </p>
+        </div>
+        <!-- <p style="font-size: 30px; padding-top:10px; padding-bottom: 20px; line-height: 30px;">
+            สรุปผลการทดสอบของ {{reportSearchList?.location_name}} วันที่ {{reportSearchList?.from_date}} - {{reportSearchList?.to_date}}</p> -->
+        <button mat-raised-button style="margin-bottom: 20px; margin-right: 10px; background: #FBC04E;"
+            (click)="exportDialog()">Export</button>
+    </div>
+    <div fxLayoutAlign="space-between center" fxlayout="row" style="padding-bottom: 20px; ">
+        <mat-card class="card1" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #1A8CBA;">จำนวนผู้สมัคร</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;"> {{reportSearchList?.total_test}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card2" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px;color: #04C000;">จำนวนผู้สอบ</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;">{{reportSearchList?.take_test}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card3" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #FE0022;">จำนวนผู้ไม่มาสอบ
+            </mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;">{{reportSearchList?.no_show}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card3">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #FE0022;">โดนระงับการสอบ
+            </mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;">0</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div fxLayoutAlign="space-around center" fxlayout="row" style="padding-bottom: 20px; ">
+        <mat-card class="card1" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #1A8CBA;">สอบผ่าน</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;"> {{reportSearchList?.passed}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card2" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px;color: #04C000;">สอบไม่ผ่าน</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;">{{reportSearchList?.take_test - reportSearchList?.passed}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card3" style="margin-right: 10px;">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #FE0022;">สอบผ่าน%
+            </mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;" *ngIf="reportSearchList?.passed == 0">0 %</p>
+                <p style="font-size: 72px; margin-top:75px;" *ngIf="reportSearchList?.passed != 0">{{(reportSearchList?.passed*100) / reportSearchList?.take_test | number: '1.0-0'}} %</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="card3">
+            <mat-card-title style="padding-top: 10px; padding-bottom: 10px; color: #FE0022;">สอบไม่ผ่าน%
+            </mat-card-title>
+            <hr>
+            <mat-card-content>
+                <p style="font-size: 72px; margin-top:75px;" *ngIf="reportSearchList?.passed == 0"> 100 %</p>
+                <p style="font-size: 72px; margin-top:75px;" *ngIf="reportSearchList?.passed != 0">{{(100)-(reportSearchList?.passed*100) / reportSearchList?.take_test | number: '1.0-0'}} %</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="table" style="margin-bottom: 10px;">
+        <table mat-table [dataSource]="displayData"  class="mat-elevation-z8">
+            <ng-container matColumnDef="1">
+                <th mat-header-cell *matHeaderCellDef width="10%">ลำดับ</th>
+                <td mat-cell *matCellDef="let course,let i = index;"> {{i+1}}</td>
+            </ng-container>
+            <ng-container matColumnDef="2">
+                <th mat-header-cell *matHeaderCellDef width="10%">สาขา</th>
+                <td mat-cell *matCellDef="let course"> {{course.course_name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="3">
+                <th mat-header-cell *matHeaderCellDef width="10%">วันที่เริ่มสอบ</th>
+                <td mat-cell *matCellDef="let course"> {{course.from_date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="4">
+                <th mat-header-cell *matHeaderCellDef width="10%">วันที่สิ้นสุดการสอบ</th>
+                <td mat-cell *matCellDef="let course"> {{course.to_date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="5">
+                <th mat-header-cell *matHeaderCellDef width="10%">สอบผ่าน</th>
+                <td mat-cell *matCellDef="let course"> {{course.passed}}</td>
+            </ng-container>
+            <ng-container matColumnDef="6">
+                <th mat-header-cell *matHeaderCellDef width="10%">สอบไม่ผ่าน</th>
+                <td mat-cell *matCellDef="let course"> {{course.take_test - course.passed}}</td>
+            </ng-container>
+            <ng-container matColumnDef="7">
+                <th mat-header-cell *matHeaderCellDef width="10%">ไม่มาสอบ</th>
+                <td mat-cell *matCellDef="let course"> {{course.no_show}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="column"></tr>
+            <tr mat-row *matRowDef="let row; columns: column;  let i = index;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

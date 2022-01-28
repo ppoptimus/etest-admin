@@ -1,0 +1,143 @@
+.remark {
+background: #FFDEDE;
+border: 3px solid #FE0022;
+box-sizing: border-box;
+border-radius: 10px;
+height: 220px;
+margin-right: 50px;
+margin-left: 0px;
+}
+
+.remarkcontent {
+background: #FFFFFF;
+border-radius: 10px;
+height: 110px;
+margin-left: 10px;
+margin-right: 10px;
+// padding-bottom: -20px;
+}
+
+
+
+.remarkheader{
+    font-family: kanit;
+font-style: normal;
+font-weight: 100;
+font-size: 36px;
+line-height: 44px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.015em;
+
+color: #FF5C5C;
+}
+
+:host ::ng-deep iframe{
+    max-width: 100%;
+    max-height: 90%;
+    pointer-events: all;
+}
+
+.pic span{
+    pointer-events: none;
+    // min-height: 75px;
+}
+
+
+:host ::ng-deep img{
+    cursor: pointer;
+    max-width: 150px;
+    max-height: 150px;
+    pointer-events: all;
+}
+
+:host ::ng-deep video{
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 90%;
+    pointer-events: all;
+}
+
+// :host ::ng-deep .choiceContainer span{
+//     max-width: 100%;
+//     display: inline-flex;
+//   max-width: 100px;
+//   overflow-wrap: break-word;
+//   word-wrap: break-word;
+// }
+
+
+
+// :host ::ng-deep .matchcontainer img{
+//     max-width: 190%;
+//     max-height: 400px;
+// }
+
+:host ::ng-deep audio{
+    max-width: 100%;    
+}
+
+.choiceContainer{
+    width: 90%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+    margin: 50px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.matchcontainer{
+    width: 45%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 50px;
+    height: 100%;
+    // min-height: 75px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.matchcontainer1{
+    width: 90%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+    margin: 50px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.marginright {
+    padding-left: 22px;
+    margin-right: 18px;
+    padding-bottom: 20px;
+}
+
+.lefttable {
+  width: 45%;
+}
+
+.leftanswer{
+  margin-top:20px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  background: #D3D3D3;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+
+:host ::ng-deep mat-cell img {
+    width: 50px;
+    height: 50px;
+}

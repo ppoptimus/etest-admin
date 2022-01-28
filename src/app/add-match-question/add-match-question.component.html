@@ -1,0 +1,195 @@
+<div class="container">
+  <mat-toolbar class="shadow">
+    <mat-toolbar-row>
+      <mat-icon mat-list-icon style="cursor: pointer; padding-top: 15px;" (click)=back()>keyboard_backspace</mat-icon>
+      <mat-label class="toplabel" style="padding-top: 15px;" (click)=back()>&nbsp;&nbsp;คำถามแบบจับคู่</mat-label>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="marginright">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field appearance="outline">
+        <mat-label>สาขา</mat-label>
+        <input matInput value={{courses?.course_name}} disabled>
+      </mat-form-field>
+    </div>
+   
+
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>เรื่อง</mat-label>
+      <input matInput value={{courses?.topic_name}} disabled>
+    </mat-form-field>
+    <form [formGroup]="createForm">
+      <br>
+      <mat-label style="font-size: 24px;">คำถาม</mat-label>
+      <div style="padding-top: 10px;"></div>
+      <editor formControlName="question_name" [init]="tinymceInit"></editor>
+      <div class="leftanswer">
+        <br>
+        <mat-label style="font-size: 24px;">คำตอบฝั่งซ้าย</mat-label>
+        <ng-container formArrayName="question_matches">
+          <ng-container *ngFor="let x of createForm['controls']['question_matches']['controls']; let i = index" [formGroupName]="i">
+            <editor formControlName="question_name" [init]="tinymceInit"></editor>
+          </ng-container>
+        </ng-container>
+        <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px;">
+          <span class="spacer"></span>
+          <button *ngIf="!resData" class="save" mat-raised-button (click)="addLeftForm()">เพิ่มคำตอบฝั่งซ้าย</button>
+        </div>
+      </div>
+
+
+      <div class="leftanswer">
+        <br>
+        <mat-label style="font-size: 24px;">คำตอบฝั่งขวา</mat-label>
+        <ng-container formArrayName="choices">
+          <ng-container *ngFor="let item of createForm['controls']['choices']['controls'];let i = index"
+            [formGroupName]="i">
+            <div style="padding-top: 10px;"></div>
+            <editor formControlName="choice_name" [init]="tinymceInit"></editor>
+          </ng-container>
+        </ng-container>
+        <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px;">
+          <span class="spacer"></span>
+          <button *ngIf="!resData" class="save" mat-raised-button (click)="addForm()">เพิ่มคำตอบฝั่งขวา</button>
+        </div>
+      </div>
+    </form>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div style="margin-top: 10px; width: 48%;" *ngIf="!resData">
+        <mat-table [dataSource]="displayMatch" class="mat-elevation-z8">
+          <ng-container matColumnDef="1">
+            <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index"> {{i+1}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="2">
+            <mat-header-cell *matHeaderCellDef> คำตอบฝั่งซ้าย </mat-header-cell>
+            <mat-cell *matCellDef="let q" [innerHTML]="q.question_name | safeurl"></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="3">
+            <mat-header-cell *matHeaderCellDef> คำตอบ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+
+              <mat-form-field appearance="outline" style="width: 70%;" *ngIf="resData">
+                <mat-label></mat-label>
+                <mat-select (selectionChange)="leftChange(index,$event)">
+                  <mat-option *ngFor="let x of resData.choices; let i = index" [value]="x.choice_id">
+                    {{textthai[i]}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="4">
+            <mat-header-cell *matHeaderCellDef> ลบ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+              <mat-icon (click)="removeChoice(index)" style="color: red; cursor: pointer" >delete_forever</mat-icon>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="leftColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: leftColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <div style="margin-top: 10px; width: 48%;" *ngIf="resData">
+        <mat-table [dataSource]="resData.question_matches" class="mat-elevation-z8">
+          <ng-container matColumnDef="1">
+            <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index"> {{i+1}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="2">
+            <mat-header-cell *matHeaderCellDef> คำตอบฝั่งซ้าย </mat-header-cell>
+            <mat-cell *matCellDef="let q" [innerHTML]="q.question_name | safeurl"></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="3">
+            <mat-header-cell *matHeaderCellDef> คำตอบ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+
+              <mat-form-field appearance="outline" style="width: 70%;" *ngIf="resData">
+                <mat-label></mat-label>
+                <mat-select (selectionChange)="leftChange(index,$event)">
+                  <mat-option *ngFor="let x of resData.choices; let i = index" [value]="x.choice_id">
+                    {{textthai[i]}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="4">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+              <mat-icon (click)="removeChoice(index)" style="color: red; cursor: pointer" *ngIf="!resData">delete_forever</mat-icon>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="leftColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: leftColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+  
+      <div style="margin-top: 10px; width: 48%;" *ngIf="!resData">
+        <mat-table [dataSource]="question" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index"> {{textthai[i]}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> คำตอบฝั่งขวา </mat-header-cell>
+            <mat-cell *matCellDef="let q" [innerHTML]="q.choice_name | safeurl"> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="random">
+            <mat-header-cell *matHeaderCellDef> ไม่ให้สลับช้อย </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index">&nbsp;&nbsp;&nbsp;<mat-checkbox
+                [checked]="getForm.at(i).get('is_random').value" (change)="check1(i,$event)"></mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> ลบ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+              <mat-icon (click)="remove(index)" style="color: red; cursor: pointer" >delete_forever</mat-icon>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      
+      <div style="margin-top: 10px; width: 48%;" *ngIf="resData">
+        <mat-table [dataSource]="question" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index"> {{textthai[i]}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> คำตอบฝั่งขวา </mat-header-cell>
+            <mat-cell *matCellDef="let q" [innerHTML]="q.choice_name | safeurl"> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="random">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let q; let i = index"> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let q; let index = index">
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" style="margin-top: 50px;">
+      <button class="save" mat-raised-button (click)="saveQuestion(createForm.value)" *ngIf="!resData" [disabled]=!createForm.valid>บันทึกคำถามเพื่อเลือกคำตอบของช้อยส์</button>
+      <button class="save" mat-raised-button (click)="saveUpdate()" [disabled]=!createForm.valid *ngIf="resData">บันทึก</button>
+      <button class="save" mat-raised-button (click)="back()">ยกเลิก</button>
+    </div>
+  </div>
+</div>
+<!-- <pre>{{createForm.getRawValue() | json}}</pre> -->

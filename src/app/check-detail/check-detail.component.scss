@@ -1,0 +1,122 @@
+table {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.error {
+  font-size: 11px;
+  color: red;
+}
+
+.height {
+  height: 48px;
+  width: 159px;
+  margin-top: 13px;
+  border-radius: 200px;
+  background: #56ccf2;
+  font-family: Kanit;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  // line-height: px;
+  /* identical to box height, or 100% */
+
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  color: #131212;
+}
+
+.shadow {
+  background: #ffffff;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  height: 82px;
+}
+
+.marginright {
+  margin-left: 12px;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.searchbar {
+  width: 60%;
+}
+
+.backdropBackground {
+  background: #f9f3be;
+}
+
+.mat-button-toggle {
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 4px;
+  // margin-left: 4px;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #cccccc;
+}
+.mat-button-toggle-checked {
+  background-color: #2bbeee;
+}
+
+
+.font {
+  font-family: Kanit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #7c7c7c;
+}
+
+::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-bar {
+  background-color: rgba(4, 192, 0, 0.31);
+}
+::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-thumb {
+  background-color: #04c000;
+}
+
+.save {
+  margin-bottom: 10px;
+  background-color: #2bbeee;
+  border-radius: 4px;
+}
+
+.back {
+  margin-left: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.save1 {
+  margin-bottom: 10px;
+  background-color: #fb4e4e;
+  border-radius: 4px;
+  justify-content: flex-end;
+}
+
+.save2 {
+  margin-bottom: 10px;
+  background-color:rgb(241, 225, 78);
+  border-radius: 4px;
+  justify-content: flex-end;
+}
+
+.a {
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

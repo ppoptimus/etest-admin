@@ -1,0 +1,74 @@
+<mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-toolbar-row>
+        <p>รายงานการวิเคราะห์</p>
+        <span class="spacer"></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+    <div style="padding-top: 10px;" class="content">
+
+        <div fxLayoutAlign="space-between center" fxlayout="row">
+            <div fxFlex="52">
+                <div fxLayout="column">
+                    <p class="header">รายงานการวิเคราะห์</p>
+                    <mat-form-field appearance="outline" style="width: 100%;" >
+                        <mat-label>หัวข้อรายงาน</mat-label>
+                        <mat-select >
+                            <mat-option *ngFor="let x of reports" [value]="x.value" (click)="onReportType(x)">
+                                {{x.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex="45" fxLayoutAlign="space-between center" fxLayout="row">
+                <div fxLayout="column" fxFlex="48">
+                    <p class="header">วันเริ่มต้น</p>
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <mat-label>วันเริ่มต้น</mat-label>
+                        <input matInput [matDatepicker]="picker1"  [(ngModel)]="query.from_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxFlex="48">
+                    <p class="header">วันสิ้นสุด</p>
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <mat-label>วันสิ้นสุด</mat-label>
+                        <input matInput [matDatepicker]="picker2"  [(ngModel)]="query.to_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+         <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="column" fxFlex="52">
+                <p class="header">กลุ่มสาขาอาชีพ</p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>สาขา</mat-label>
+                    <mat-select (selectionChange)="setCourse($event)" [(ngModel)]="query.occupation_group_id">
+                        <mat-option *ngFor="let occu of occu" [value]="occu.occupation_group_id" >
+                            {{occu.occupation_group_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="45">
+                <p class="header">สาขา</p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>สาขา</mat-label>
+                    <mat-select  [(ngModel)]="query.course_id">
+                        <mat-option *ngFor="let course of course" [value]="course.course_id">
+                            {{course.course_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayoutAlign="end" style="margin-right: 25px;"> 
+            <button mat-raised-button class="searchbutton" (click)="onSearch()">ค้นหา</button> </div>
+    </div>
+</div>

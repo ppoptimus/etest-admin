@@ -1,0 +1,67 @@
+.shadow {
+    background: #ffffff;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    height: 82px;
+  }
+
+  :host ::ng-deep img{
+    width: 100px;
+    height: 100px;
+  }
+
+  :host ::ng-deep iframe{
+    width: 200px;
+    height: 100px;
+  }
+
+  :host ::ng-deep video {
+    width: 200px;
+    height: 100px;
+  }
+
+  
+.toplabel {
+  font-family: Kanit;
+font-style: normal;
+font-weight: 100;
+font-size: 30px;
+line-height: 22px;
+cursor: pointer;
+}
+
+  .marginright {
+    padding-left: 22px;
+    margin-right: 18px;
+    padding-bottom: 20px;
+}
+
+.lefttable {
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  width: 48%;
+}
+
+.leftanswer{
+  margin-top:20px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  background: #D3D3D3;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+
+.save {
+  background: #F2994A;
+border-radius: 200px;
+color: white;
+}
+
+.cancel{
+  border-radius: 200px;
+}
+
+.a{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+

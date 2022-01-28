@@ -1,0 +1,27 @@
+<div class="importcontainer">
+    <div class="importcontent">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <p class="header">นำเข้าข้อสอบ</p>
+        <button mat-raised-button style="width: 150px; color: white; background-color: rgb(32, 32, 240);" (click)="download()">ดาวโหลด template</button>
+      </div>
+        
+        <mat-form-field appearance="outline" style="width: 40%">
+            <mat-label>สาขา</mat-label>
+            <input  type="text" value={{topicData?.course_name}} matInput disabled > 
+          </mat-form-field>
+
+          <br><mat-form-field appearance="outline" style="width: 40%">
+            <mat-label>เรื่อง</mat-label>
+            <input  type="text" value={{topicData?.topic_name}} matInput disabled > 
+          </mat-form-field>
+
+          <br><button mat-raised-button class="choose" (click)="fileInput.click()">เลือกไฟล์</button>
+          <br>
+          <mat-form-field appearance="outline" style="width: 40%">
+            <mat-label>ชื่อไฟล์</mat-label>
+            <input type="text" value={{selectfile?.name}} matInput disabled>
+          </mat-form-field>
+          <input style="display: none;" type="file" (change)="onSelectFile($event)" #fileInput>
+          <br><button mat-raised-button class="upload"  (click)="upload()">อัพโหลด</button>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="testEngineContainer secondIndex">
+    <div class="lightGreenBackground borderBottomRLRadius25PX" style="margin-top: -10px;">
+        <div class="marinLR50PX">
+            <div fxLayout >
+                <div fxFlex="100%" class="marinTB20PX">
+                    <button mat-icon-button class="float" *ngIf="button ==='yes'">
+                        <mat-icon (click)="toggle()">menu</mat-icon>
+                      </button>
+                      <button mat-icon-button class="float" *ngIf="button ==='no'">
+                        <mat-icon  (click)="toggle()">menu</mat-icon>
+                      </button>
+                      <span class="fontSize30 float" style="padding-top:10px">เมนู</span>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="marinLR50PX whiteBackground borderRadius7PX height200PX boxShader marginT40PX">
+        <div class="margin20PX paddingT20PX">
+            <p class="textCenter fontSize30 paddingT10PX">ยืนยันส่งการตรวจคำถาม</p>
+            <p class="fontSize20 paddingT10PX"><span class="greyFont">สาขา</span> &nbsp; {{check?.course_name}}</p>
+            <p class="fontSize20 paddingT10PX"><span class="greyFont">เรื่อง</span> &nbsp; {{check?.topic_name}}</p>
+            <p class="fontSize20 paddingT10PX"><span class="greyFont">จำนวนคำถามทั้งหมด</span> &nbsp; {{check?.questions.length}}</p>
+        </div>
+     </div>
+    <div class="marinLR50PX whiteBackground borderRadius7PX height200PX boxShader marginT40PX">
+        <div class="margin20PX paddingT20PX">
+            <div fxLayout class="paddingT10PX  borderBTMGrey">
+                <div fxFlex="50%" >
+                    <p><mat-icon class="float greenFont">check_box</mat-icon><span class="fontSize20">คำถามถูกตรวจสอบเรียบร้อย</span></p>
+                </div>
+                <div fxFlex="50%" class="textRight ">
+                    <span class="fontSize20" style="padding-top:10px">{{end?.total_approves}}  ข้อ</span>
+                </div>
+            </div>
+            <div fxLayout class="paddingT20PX  borderBTMGrey">
+                <div fxFlex="50%" >
+                    <p><mat-icon class="float redFont">indeterminate_check_box</mat-icon><span class="fontSize20">คำถามถูกระงับการใช้งาน</span></p>
+                </div>
+                <div fxFlex="50%" class="textRight">
+                    <span class="fontSize20" style="padding-top:10px">{{end?.total_suspends}}  ข้อ</span>
+                </div>
+            </div>
+            <div fxLayout class="paddingT20PX  borderBTMGrey">
+                <div fxFlex="50%" >
+                    <p><mat-icon class="float greyFont">check_box_outline_blank</mat-icon><span class="fontSize20">คำถามยังไม่ถูกตรวจสอบ</span></p>
+                </div>
+                <div fxFlex="50%" class="textRight">
+                    <span class="fontSize20" style="padding-top:10px">{{end?.total_unchecks}}  ข้อ</span>
+                </div>
+            </div>
+            
+                      
+                        
+        </div>
+     </div>
+     <div class="textCenter marginT40PX">
+        <button mat-button *ngIf="end?.total_unchecks != 0" class="finishTestButton whiteFont width150PX margin5PX height50PX fontSize20"  (click)="confirm()" disabled>เสร็จสิ้น</button>
+        <button mat-button *ngIf="end?.total_unchecks == 0" class="finishTestButton whiteFont width150PX margin5PX height50PX fontSize20"   (click)="confirm()">เสร็จสิ้น</button>
+        <button mat-button class="backBut  width150PX margin5PX height50PX fontSize20"  [routerLink]="['/check']" >กลับ</button>
+      
+     </div>
+     <div class="marginT40PX marinLR50PX">
+
+         <p>ปุ่ม <b class="greenFont" >เสร็จสิ้น</b> นำคำถามที่ตรวจทั้งหมดแล้ว ไปใช้ในการสอบจริง </p>
+
+     </div>
+     
+</div>

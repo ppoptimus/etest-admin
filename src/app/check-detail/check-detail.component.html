@@ -1,0 +1,147 @@
+<div class="container">
+  <mat-toolbar class="shadow" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-toolbar-row>
+      <mat-form-field appearance="outline" style="padding-top: 40px; width:65%; font-family: kanit;"
+        [style.fontSize.px]=13>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <input matInput placeholder="เรื่อง" (keyup)="applyFilter($event)" class="searchbar">
+        <mat-icon matPrefix style="color: rgba(0, 0, 0, 0.5);">search</mat-icon>
+      </mat-form-field>
+      <span class="spacer"></span>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="marginright">
+    <div style="padding-top: 10px; background-color: white;">
+      <div fxLayoutAlign="space-between center" fxlayout="row">
+        <mat-label class="font">สาขา&nbsp;</mat-label>
+        <mat-label style="font-size: 18px">{{courses?.course_name}}</mat-label>
+        <span class="spacer"></span>
+        <div>
+          <button class="save2" style="margin-right: 10px;" mat-raised-button (click)="sendBack()">ส่งคืนข้อสอบ</button>
+          <button class="save1" mat-raised-button (click)="suspend()">ระงับใช้ข้อสอบทั้งชุด</button>
+        </div>
+      </div>
+      <div>
+
+        <div fxFlex=40>
+          <form [formGroup]="form">
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
+              <div fxFlex=50>
+                <h1 class="font">เวลาทำข้อสอบ</h1>
+              </div>
+              <div fxFlex=50 fxLayout="row" fxLayoutAlign="space-between">
+                <input style="margin-bottom: 5px; width: 20%; text-align: center;" type="number" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" formControlName="test_time">
+                <h1 class="font">นาที</h1>
+              </div>
+            </div>
+          
+          <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
+            <div fxFlex=50>
+              <h1 class="font">จำนวนสุ่มคำถามทั้งหมด</h1>
+            </div>
+            <div fxFlex=50 fxLayout="row" fxLayoutAlign="space-between">
+              <input [value]="sum" type=number disabled style="margin-bottom: 5px; width: 20%; text-align: center; ">
+              <h1 class="font">ข้อ</h1>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
+            <div fxFlex=50>
+              <h1 class="font">คะแนนเต็ม</h1>
+            </div>
+            <div fxFlex=50 fxLayout="row" fxLayoutAlign="space-between">
+              <input style="margin-bottom: 5px; width: 20%; text-align: center;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" type="number" formControlName="full_score">
+              <h1 class="font">คะแนน</h1>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px">
+            <div fxFlex=50>
+              <h1 class="font">คะแนนเต็มคิดเป็นร้อยละ</h1>
+            </div>
+            <div fxFlex=50 fxLayout="row" fxLayoutAlign="space-between">
+              <input style="margin-bottom: 5px; width: 20%; text-align: center;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" formControlName="percent_full_score" type="number">
+              <h1 class="font">ของคะแนนทั้งหมด</h1>
+            </div>
+          </div>
+
+          <mat-radio-group [(ngModel)]="value" [ngModelOptions]="{standalone: true}" >
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 10px">
+              <mat-radio-button value="1" [checked]="courses.passing_score != null">มีเกณฑ์ขั้นต่ำ</mat-radio-button>
+              <mat-radio-button value="2" [checked]="courses.passing_score == null" (change)="setPassing()">ไม่มีเกณฑ์ขั้นต่ำ</mat-radio-button>
+            </div>
+          </mat-radio-group>
+          <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 5px" *ngIf="value == 1 || courses?.passing_score !== null">
+            <div fxFlex=50>
+              <h1 class="font">เกณฑ์การผ่านร้อยละ</h1>
+            </div>
+            <div fxFlex=50 fxLayout="row" fxLayoutAlign="space-between">
+              <input style="margin-bottom: 5px; width: 20%;; text-align: center;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" formControlName="passing_score" type="number">
+              <h1 class="font">ของคะแนนภาคความรู้</h1>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+   
+
+      <div class="a">
+        <table mat-table [dataSource]="courses?.topics" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef width="15%">ลำดับ</th>
+            <td mat-cell *matCellDef="let course; let i = index"> {{i+1}}</td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef width="30%">เรื่อง</th>
+            <td mat-cell *matCellDef="let course"> {{course.topic_name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="noquestions">
+            <th mat-header-cell *matHeaderCellDef width="15%">จำนวนคำถาม</th>
+            <td mat-cell *matCellDef="let course">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{(course.no_of_choices+course.no_of_matchings)-course.no_of_suspend}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="random">
+            <th mat-header-cell *matHeaderCellDef width="15%">จำนวนสุ่มคำถาม</th>
+            <td mat-cell *matCellDef="let course; let i = index">&nbsp;&nbsp;&nbsp;
+              <input type="number" min="0" (input)="sumRan()"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="course.no_of_random" style="width: 40px; height: 30px; text-align: center;"></td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef width="10%">สถานะ</th>
+            <td mat-cell *matCellDef="let course">
+              <div fxLayoutAlign="space-between center" fxlayout="row">
+                <mat-icon *ngIf="course.is_approve==true" class="textLeft" style="color: rgb(0, 189, 116);">
+                  check_box
+                </mat-icon>
+                <mat-icon *ngIf="course.is_approve==null" class="lightGreenFont textLeft">
+                  check_box_outline_blank
+                </mat-icon>
+                <mat-icon *ngIf="course.is_approve==false" class="textLeft" style="color:#2D9CDB;">
+                  check_box
+                </mat-icon>
+                <span *ngIf="course.is_approve==true">ตรวจแล้ว</span>
+                <span *ngIf="course.is_approve==null">ยังไม่ได้ตรวจ</span>
+                <span *ngIf="course.is_approve==false">ตรวจยังไม่เสร็จ</span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef width="15%" style="text-align: center;">&nbsp;&nbsp;&nbsp;ข้อมูล</th>
+            <td mat-cell *matCellDef="let course" style="text-align: center;">
+              <mat-icon *ngIf="course.no_of_choices+course.no_of_matchings == 0" style=" color: #bebebe; cursor: pointer;" >create</mat-icon>
+              <mat-icon *ngIf="course.no_of_choices+course.no_of_matchings != 0" style=" color: #56CCF2; cursor: pointer;" [routerLink]="['/check',course.course_id,course.topic_id]">create</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="tableDisplayColumn"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableDisplayColumn;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+      <br>
+      <button class="save" mat-raised-button (click)="save()" [disabled]="!form.valid || isHigher || courses?.topics?.data?.length == 0 || isApprove || sum == 0">บันทึก</button>
+      <button class="back" mat-raised-button (click)="back()">กลับ</button>
+    </div>
+  </div>
+</div>

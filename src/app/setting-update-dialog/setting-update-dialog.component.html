@@ -1,0 +1,28 @@
+<form [formGroup]="updateForm">
+  <div style="display: flex;flex-direction: row;">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>สาขาอาชีพ</mat-label>
+      <input [(ngModel)]="data.occupationData.occupation_group_name" type="text" matInput
+        formControlName="occupation_group_name">
+      <!-- <mat-error *ngIf="updateForm.get('course_name').hasError('required')">This field is required</mat-error> -->
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>รหัสสาขาอาชีพ</mat-label>
+      <!-- <input type="text" matInput placeholder="บทเรียน" #input> -->
+      <input [(ngModel)]="data.occupationData.occupation_group_code" type="text" matInput placeholder="S001"
+        formControlName="occupation_group_code">
+      <!-- <mat-error *ngIf="updateForm.get('topic_name').hasError('required')">This field is required</mat-error> -->
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+
+    <button mat-raised-button [mat-dialog-close] [disabled]="!updateForm.valid"
+      (click)="update(updateForm.value)">บันทึก</button>
+    <button mat-raised-button [mat-dialog-close]>ยกเลิก</button>
+  </div>
+  <!-- <pre>{{updateForm.getRawValue() | json}}</pre> -->
+
+</form>

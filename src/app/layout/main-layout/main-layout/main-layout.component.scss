@@ -1,0 +1,78 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+}
+.border {
+  border: 1px solid #FFFFFF;
+  width: 250px;
+  margin: auto
+}
+.header {
+font-family: Kanit;
+font-style: normal;
+font-weight: bold;
+font-size: 22px;
+line-height: 24px;
+text-align: center;
+padding-top: 8px;
+letter-spacing: 0.15px;
+color: #FFFFFF;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+cursor: pointer;
+}
+.drawer {
+background: linear-gradient(145.41deg, #095886 -17.96%, rgba(25, 195, 249, 0.880208) 75.42%, #2286FF 100%);
+position: absolute;
+width: 299px;
+height: 100%;
+left: 0px;
+top: 0px;
+}
+.spacer {
+    flex: 1 1 auto;
+  }
+.sidenav-container
+{
+    flex: 1 0;
+}
+.mat-list-icon {
+    color: white;
+  }
+.font{
+font-family: Kanit;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 18px;
+/* identical to box height, or 90% */
+letter-spacing: 0.15px;
+color: #FFFFFF;
+}
+.drawercontent {
+  background-color: #FFFFFF;
+}
+
+.dropdown {
+  background: transparent;
+  border-color: transparent;
+  // display: flex;
+  align-items: center;
+  // flex-direction: row;
+
+}
+
+.mat-expansion-panel-header {
+padding: 0;
+}
+
+
+.mat-expansion-panel:not(.mat-expanded) 
+.mat-expansion-panel-header:not([aria-disabled='true']):hover {   background:transparent; }
+// .mat-expansion-panel-body:not([aria-disabled='true']):hover {   background:transparent; }

@@ -1,0 +1,80 @@
+<div class="container">
+    <p class="header">ผลการทดสอบภาคทฤษฎี กรมพัฒนาฝีมือแรงงาน</p>
+    <div class="personConatiner">
+        <div style="padding: 20px;">
+            <div class="subheaderdiv">
+                <p class="subheader">ข้อมูลผู้สอบ</p>
+            </div>
+            <div class="info">
+                <div fxFlex="30" class="picturebox" fxLayout="column" fxLayoutAlign="center center">
+                        <img style="width: 100%; height: auto;" [src]=examPicture/>
+                </div>
+                <div fxFlex="70">
+                    <div class="infobox" fxLayoutAlign="start center">
+                        ชื่อ-สกุล : {{examineedata.test.candidate_name}}
+                    </div>
+                    <div class="infobox" fxLayoutAlign="start center">
+                        เลขที่บัตรประชาชน : {{examineedata.test.citizen_id}}
+                    </div>
+                    <div class="infobox" fxLayoutAlign="start center">
+                        ที่อยู่ : {{examineedata.test.candidate_address}}
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="infosubbox" fxLayoutAlign="start center">
+                            วันที่ : {{examineedata.test.from_date | date:'shortDate':'':'th'}} - {{examineedata.test.to_date | date:'shortDate':'':'th'}}
+                        </div>
+                        <div class="infosubbox" fxLayoutAlign="start center">
+                            เวลาเริ่มสอบ : {{examineedata.test.from_time}}
+                        </div>
+                        <div class="infosubbox" fxLayoutAlign="start center">
+                            เวลาสอบเสร็จ : {{examineedata.test.to_time}}
+                        </div>
+                    </div>
+                    <div class="infobox" fxLayoutAlign="start center">
+                        สถานที่สอบ : {{examineedata.test.location_name}}
+                    </div>
+                </div>
+            </div>
+            <div class="greenbox" fxLayoutAlign="start center">
+                ผลการทดสอบภาคทฤษฎี
+            </div>
+            <div fxLayoutAlign="space-between center" fxLayout="row">
+                <div class="coursebox" fxLayoutAlign="start center">
+                  <span>  สาขา : {{examineedata.test.course_name}}</span>
+                </div>
+                <div class="coursebox" fxLayoutAlign="space-evenly center">
+                    คะแนนเต็ม <span>{{examineedata.test.full_score}}</span> ข้อ
+                </div>
+                <div class="coursebox" fxLayoutAlign="space-evenly center">
+                    ข้อสอบที่ทำได้ <span>{{examineedata.test.total_scores}}</span> ข้อ
+                </div>
+            </div>
+            <div class="greenbox" fxLayoutAlign="start center">
+                คะแนนแต่ละหมวด
+            </div>
+            <div fxLayoutAlign="space-between center" fxLayout="row">
+                <div class="graybox" style="width: 15%;" fxLayoutAlign="center center">
+                    ลำดับ
+                </div>
+                <div class="graybox" style="width: 65%;" fxLayoutAlign="center center">
+                    หัวข้อ
+                </div>
+                <div class="graybox" style="width: 20%;" fxLayoutAlign="center center">
+                    จำนวนข้อสอบ
+                </div>
+            </div>
+
+            <div fxLayoutAlign="space-between center" fxLayout="row" *ngFor="let a of examineedata.topics; let i = index;">
+                <div class="tablebox" style="width: 15%;" fxLayoutAlign="center center">
+                    {{i+1}}
+                </div>
+                <div class="tablebox" style="width: 65%;" fxLayoutAlign="start center">
+                    {{a.topic_name}}
+                </div>
+                <div class="tablebox" style="width: 20%;" fxLayoutAlign="center center">
+                    {{a.total_questions}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
